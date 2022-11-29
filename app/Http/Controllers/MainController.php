@@ -29,4 +29,9 @@ class MainController extends Controller
         $id = 'Rainbow Six';
         return Inertia::render('R6/Index', compact('id'));
     }
+
+    public function dashboard()
+    {
+        return Inertia::render('Dashboard');
+    }
 }

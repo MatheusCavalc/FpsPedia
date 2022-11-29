@@ -6,7 +6,9 @@ namespace Database\Seeders;
 
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +26,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('12345678'),
+            'admin' => true,
+        ]);
+
         Team::create([
             'name' => 'MIBR',
             'players' => [
@@ -37,7 +46,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Olavo Marcelo',
             'nationality' => 'Brazil',
             'born' => '2003/02/07',
-            'status' => true,
+            'status' => 'active',
             'team_id' => 1
         ]);
     }

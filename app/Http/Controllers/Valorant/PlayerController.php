@@ -16,11 +16,13 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $players = Player::where('game', 'valorant')->get();
+        $players = Player::where('game', 'valorant')
+                            ->get();
 
-        //dd($players[0]->team->name);
+        //$players = Player::paginate(10);
+        //dd($players);
 
-        return Inertia::render('Valorant/Players', compact('players'));
+        return Inertia::render('Valorant/Dashboard/Players/Index', compact('players'));
     }
 
     /**
@@ -30,7 +32,7 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Valorant/Dashboard/Players/Create');
     }
 
     /**
@@ -41,7 +43,19 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nickname' => 'required',
+            'name' => 'required',
+            'nationality' => 'required',
+            'born' => 'required',
+            'status' => 'required',
+            'team_id' => 'required',
+            'game' => 'required'
+        ]);
+
+        Player::create($data);
+
+        return redirect('/dashboard/valorant/players');
     }
 
     /**
@@ -52,7 +66,7 @@ class PlayerController extends Controller
      */
     public function show($id)
     {
-
+        //nao utilizado
     }
 
     /**
@@ -63,7 +77,9 @@ class PlayerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $player = Player::findOrFail($id);
+
+        return Inertia::render('Valorant/Dashboard/Players/Edit', compact('player'));
     }
 
     /**
@@ -75,7 +91,19 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'nickname' => 'required',
+            'name' => 'required',
+            'nationality' => 'required',
+            'born' => 'required',
+            'status' => 'required',
+            'team_id' => 'required',
+            'game' => 'required'
+        ]);
+
+        Player::findOrFail($id)->update($data);
+
+        return redirect('/dashboard/valorant/players');
     }
 
     /**
@@ -86,6 +114,6 @@ class PlayerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Nao utilizado
     }
 }

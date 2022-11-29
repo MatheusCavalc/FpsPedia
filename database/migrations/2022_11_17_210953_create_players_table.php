@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nationality');
             $table->date('born');
-            $table->boolean('status');
+            $table->enum('status', ['active', 'inactive', 'retired']);
 
             $table->foreignId('team_id')->constrained();
 
