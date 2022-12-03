@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Valorant;
 
 use App\Http\Controllers\Controller;
-use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PlayerController extends Controller
+
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +17,12 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $players = Player::where('game', 'valorant')
+        $teams = Team::where('game', 'valorant')
                             ->paginate(5);
 
-        //$players = Player::paginate(10);
-        //dd($players);
-
-        return Inertia::render('Valorant/Dashboard/Players/Index', compact('players'));
+        return Inertia::render('Valorant/Dashboard/Teams/Index', compact('teams'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +31,7 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Valorant/Dashboard/Players/Create');
+        return Inertia::render('Valorant/Dashboard/Teams/Create');
     }
 
     /**
@@ -44,18 +43,18 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nickname' => 'required',
             'name' => 'required',
-            'nationality' => 'required',
-            'born' => 'required',
+            'region' => 'required',
+            'sub_region' => 'required',
             'status' => 'required',
-            'team_id' => 'required',
+            'location' => 'required',
+            'overview' => 'required',
             'game' => 'required'
         ]);
 
-        Player::create($data);
+        Team::create($data);
 
-        return redirect('/dashboard/valorant/players');
+        return redirect('/dashboard/valorant/teams');
     }
 
     /**
@@ -77,9 +76,9 @@ class PlayerController extends Controller
      */
     public function edit($id)
     {
-        $player = Player::findOrFail($id);
+        $team = Team::findOrFail($id);
 
-        return Inertia::render('Valorant/Dashboard/Players/Edit', compact('player'));
+        return Inertia::render('Valorant/Dashboard/Teams/Edit', compact('team'));
     }
 
     /**
@@ -92,18 +91,18 @@ class PlayerController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'nickname' => 'required',
             'name' => 'required',
-            'nationality' => 'required',
-            'born' => 'required',
+            'region' => 'required',
+            'sub_region' => 'required',
             'status' => 'required',
-            'team_id' => 'required',
+            'location' => 'required',
+            'overview' => 'required',
             'game' => 'required'
         ]);
 
-        Player::findOrFail($id)->update($data);
+        Team::findOrFail($id)->update($data);
 
-        return redirect('/dashboard/valorant/players');
+        return redirect('/dashboard/valorant/teams');
     }
 
     /**

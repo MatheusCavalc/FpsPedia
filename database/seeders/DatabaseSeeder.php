@@ -34,10 +34,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Team::create([
+            'game' => 'valorant',
             'name' => 'MIBR',
-            'players' => [
-                'heat', //OU ENVIAR O ID DO JOGADOR
-             ]
+            'region' => 'America',
+            'sub_region' => 'Brazil',
+            'status' => 'active',
+            'location' => 'United States',
+            'overview' => 'MIBR (also known as Made in Brazil) is a Brazilian professional esports organization owned by Immortals Gaming Club.'
         ]);
 
         Player::create([

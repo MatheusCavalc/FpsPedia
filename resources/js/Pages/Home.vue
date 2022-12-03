@@ -9,7 +9,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
         <div>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
             <Link :href="route('index.valorant')">
-                <img class="w-full" src="https://cdn.ome.lt/jBpgpDHUG2MtKr6bgrwcLRLNf9I=/1200x630/smart/extras/conteudos/valorant-riot-games.jpg" alt="Sunset in the mountains">
+                <img class="w-full" src="http://localhost/storage/logos/valorant-logo-image.jpg" alt="Valorant logo">
             </Link>
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2 hover:underline"><Link :href="route('index.valorant')">Valorant</Link></div>
@@ -32,7 +32,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
         <div>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
             <Link :href="route('index.csgo')">
-                <img class="w-full" src="https://cdn.ome.lt/XRQcAob6EvpzetaCZhpJ6APVjZo=/1200x630/smart/extras/conteudos/cs-go-001-1.jpg" alt="Sunset in the mountains">
+                <img class="w-full" src="http://localhost/storage/logos/csgo-logo-image.jpg" alt="CSGO logo">
             </Link>
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2 hover:underline"><Link :href="route('index.csgo')">CS:GO</Link></div>
@@ -52,7 +52,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
         <div>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
             <Link :href="route('index.rainbowsix')">
-                <img class="w-full" src="https://cdn.ome.lt/mfXGWAfX34sLgrvDRUFOKMIvayw=/1200x630/smart/extras/conteudos/16110.jpg" alt="Sunset in the mountains">
+                <img class="w-full" src="http://localhost/storage/logos/rainbowsix-logo-image.jpg" alt="Rainbow Six logo">
             </Link>
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2 hover:underline"><Link :href="route('index.rainbowsix')">Rainbow Six Siege</Link></div>

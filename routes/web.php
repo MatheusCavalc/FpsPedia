@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\MainController;
+
+
 use App\Http\Controllers\Valorant\PlayerController;
-
-
+use App\Http\Controllers\Valorant\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Home - Paginas dos visitantes
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('index');
 Route::controller(MainController::class)->name('index.')->group(function () {
     Route::get('/valorant/Home', 'valorant')->name('valorant');
     Route::get('/csgo/Home', 'valorant')->name('csgo');
@@ -47,18 +48,25 @@ Route::controller(MainController::class)->name('index.')->group(function () {
 
 //Dashboard - Paginas de Editores e Administradores
 //Players Valorant
-Route::controller(PlayerController::class)->prefix('dashboard/valorant')->name('dashboard.valorant.')->group(function () {
-    Route::get('/players', 'index')->name('players.index');//todos os jogadores
+Route::controller(PlayerController::class)->prefix('dashboard/valorant')->name('dashboard.valorant.players.')->group(function () {
+    Route::get('/players', 'index')->name('index');//todos os jogadores
+    Route::get('/players/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/players', 'store')->name('store');
+    //Route::get('/players/{id}', 'show')->name('show');
+    Route::get('/players/edit/{id}', 'edit')->name('edit');
+    Route::put('/players/update/{id}', 'update')->name('update');
+    //Route::delete('/players/{id}', 'destroy')->name('destroy');
+});
 
-    Route::get('/players/create', 'create')->name('players.create');//ir pra tela de criacao -- dashboard
-    Route::post('/players', 'store')->name('players.store');
-
-    //Route::get('/players/{id}', 'show')->name('players.show');
-
-    Route::get('/players/edit/{id}', 'edit')->name('players.edit');
-    Route::put('/players/update/{id}', 'update')->name('players.update');
-
-    Route::delete('/players/{id}', 'destroy')->name('players.destroy');
+//Teams Valorant
+Route::controller(TeamController::class)->prefix('dashboard/valorant')->name('dashboard.valorant.teams.')->group(function () {
+    Route::get('/teams', 'index')->name('index');//todos os jogadores
+    Route::get('/teams/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/teams', 'store')->name('store');
+    //Route::get('/teams/{id}', 'show')->name('show');
+    Route::get('/teams/edit/{id}', 'edit')->name('edit');
+    Route::put('/teams/update/{id}', 'update')->name('update');
+    //Route::delete('/teams/{id}', 'destroy')->name('destroy');
 });
 
 

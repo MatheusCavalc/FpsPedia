@@ -11,7 +11,7 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'players', 'staff'
+        'game', 'name', 'region', 'sub_region', 'status', 'location', 'overview'
     ];
 
     protected function players(): Attribute

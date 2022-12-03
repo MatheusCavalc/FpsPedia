@@ -15,9 +15,15 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->enum('game', ['valorant', 'csgo', 'rainbowsix']);
+
             $table->string('name');
-            $table->json('players')->nullable();
-            $table->json('staff')->nullable();
+            $table->string('region');
+            $table->string('sub_region');
+            $table->enum('status', ['active', 'inactive']);
+            $table->string('location');
+            $table->longText('overview');
+
             $table->timestamps();
         });
     }

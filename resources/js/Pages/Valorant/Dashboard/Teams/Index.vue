@@ -3,7 +3,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-const props = defineProps(['players']);
+const props = defineProps(['teams']);
 
 </script>
 
@@ -19,9 +19,9 @@ const props = defineProps(['players']);
                         <div class="flex justify-between mb-6">
 
                             <div class="flex items-center">
-                                <h1 class="text-3xl">Valorant Players</h1>
+                                <h1 class="text-3xl">Valorant Teams</h1>
 
-                                <Link :href="route('dashboard.valorant.players.create')" class="text-blue-500 text-sm ml-2">New Player</Link>
+                                <Link :href="route('dashboard.valorant.teams.create')" class="text-blue-500 text-sm ml-2">New Team</Link>
                             </div>
 
                             <input v-model="search" type="text" placeholder="Search..." class="border px-2 rounded-lg">
@@ -32,13 +32,13 @@ const props = defineProps(['players']);
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="py-3 px-6">
-                                            Nick
-                                        </th>
-                                        <th scope="col" class="py-3 px-6">
                                             Name
                                         </th>
                                         <th scope="col" class="py-3 px-6">
-                                            Nationality
+                                            Region
+                                        </th>
+                                        <th scope="col" class="py-3 px-6">
+                                            Sub Region
                                         </th>
                                         <th scope="col" class="py-3 px-6">
                                             Status
@@ -49,26 +49,26 @@ const props = defineProps(['players']);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="player in players.data" :key="player.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr v-for="team in teams.data" :key="team.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ player.nickname }}
+                                            {{ team.name }}
                                         </th>
                                         <td class="py-4 px-6">
-                                            {{player.name}}
+                                            {{team.region}}
                                         </td>
                                         <td class="py-4 px-6">
-                                            {{player.nationality}}
+                                            {{team.sub_region}}
                                         </td>
                                         <td class="py-4 px-6">
-                                            {{player.status}}
+                                            {{team.status}}
                                         </td>
                                         <td class="py-4 px-6 text-right">
-                                            <Link :href="route('dashboard.valorant.players.edit', player.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                            <Link :href="route('dashboard.valorant.teams.edit', team.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <Pagination :paginator="players" />
+                            <Pagination :paginator="teams" />
                         </div>
 
 

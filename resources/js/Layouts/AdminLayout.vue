@@ -16,7 +16,7 @@
         <div class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900">
         <div class="text-gray-100 text-xl">
             <div class="p-2.5 mt-1 flex items-center">
-            <h1 class="font-bold text-gray-200 text-[15px] ml-3">TailwindCSS</h1>
+            <h1 class="font-bold text-gray-200 text-[15px] ml-3">FPSpedia Admin</h1>
             </div>
         </div>
         <div class="my-4 bg-gray-600 h-[1px]"></div>
@@ -35,9 +35,9 @@
 
         <template #content>
         <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
-            <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-            Teams
-            </h1>
+            <Link :href="route('dashboard.valorant.teams.index')">
+              <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Teams</h1>
+            </Link>
             <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
             <Link :href="route('dashboard.valorant.players.index')">Players</Link>
             </h1>

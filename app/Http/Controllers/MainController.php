@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
@@ -14,8 +16,14 @@ class MainController extends Controller
 
     public function valorant()
     {
-        $id = 'Valorant';
-        return Inertia::render('Valorant/Index', compact('id'));
+        $players = Player::where('game', 'valorant')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        //dd($players);
+
+        return Inertia::render('Valorant/Index', compact('players'));
     }
 
     public function csgo()
