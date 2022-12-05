@@ -17,7 +17,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                     <p><Link :href="route('login')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Teams</Link></p>
 
                     <!-- route('valorant.players.index') -->
-                    <p><Link :href="route('login')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
+                    <p><Link :href="route('home.valorant.players')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
 
                     <p><Link :href="route('login')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Tournaments</Link></p>
                 </ul>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 
 
@@ -22,11 +23,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::controller(MainController::class)->name('index.')->group(function () {
     Route::get('/valorant/Home', 'valorant')->name('valorant');
-    Route::get('/csgo/Home', 'valorant')->name('csgo');
-    Route::get('/rainbowsix/Home', 'valorant')->name('rainbowsix');
-    Route::get('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/csgo/Home', 'csgo')->name('csgo');
+    Route::get('/rainbowsix/Home', 'rainbowsix')->name('rainbowsix');
+    Route::get('/dashboard', 'dashboard')->middleware(['auth', 'editor'])->name('dashboard');
 });
 
+Route::controller(HomeController::class)->name('home.')->group(function () {
+    Route::get('/valorant/players', 'valorantAllPlayers')->name('valorant.players');
+    Route::get('/valorant/player/{id}', 'valorantPlayer')->name('valorant.player');
+});
 
 
 
@@ -48,7 +53,7 @@ Route::controller(MainController::class)->name('index.')->group(function () {
 
 //Dashboard - Paginas de Editores e Administradores
 //Players Valorant
-Route::controller(PlayerController::class)->prefix('dashboard/valorant')->name('dashboard.valorant.players.')->group(function () {
+Route::controller(PlayerController::class)->middleware(['auth', 'editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.players.')->group(function () {
     Route::get('/players', 'index')->name('index');//todos os jogadores
     Route::get('/players/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/players', 'store')->name('store');
@@ -59,7 +64,7 @@ Route::controller(PlayerController::class)->prefix('dashboard/valorant')->name('
 });
 
 //Teams Valorant
-Route::controller(TeamController::class)->prefix('dashboard/valorant')->name('dashboard.valorant.teams.')->group(function () {
+Route::controller(TeamController::class)->middleware(['auth', 'editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.teams.')->group(function () {
     Route::get('/teams', 'index')->name('index');//todos os jogadores
     Route::get('/teams/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/teams', 'store')->name('store');
