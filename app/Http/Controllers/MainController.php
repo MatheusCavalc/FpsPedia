@@ -16,14 +16,16 @@ class MainController extends Controller
 
     public function valorant()
     {
+        $id = 'valorant';
         $players = Player::where('game', 'valorant')
-                            ->orderBy('updated_at', 'desc')
-                            ->take(5)
-                            ->get();
+                         ->where('view', true)
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
 
         //dd($players);
 
-        return Inertia::render('Valorant/Index', compact('players'));
+        return Inertia::render('Valorant/Index', compact('players', 'id'));
     }
 
     public function csgo()

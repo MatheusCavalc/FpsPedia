@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Valorant;
+namespace App\Http\Controllers\Admin\Valorant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Player;
@@ -18,9 +18,6 @@ class PlayerController extends Controller
     {
         $players = Player::where('game', 'valorant')
                             ->paginate(5);
-
-        //$players = Player::paginate(10);
-        //dd($players);
 
         return Inertia::render('Valorant/Dashboard/Players/Index', compact('players'));
     }
@@ -50,7 +47,8 @@ class PlayerController extends Controller
             'born' => 'required',
             'status' => 'required',
             'team_id' => 'required',
-            'game' => 'required'
+            'game' => 'required',
+            'view' => 'required'
         ]);
 
         Player::create($data);
@@ -98,7 +96,8 @@ class PlayerController extends Controller
             'born' => 'required',
             'status' => 'required',
             'team_id' => 'required',
-            'game' => 'required'
+            'game' => 'required',
+            'view' => 'required'
         ]);
 
         Player::findOrFail($id)->update($data);

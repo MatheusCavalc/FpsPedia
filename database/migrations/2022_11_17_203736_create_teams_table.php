@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('location');
             $table->longText('overview');
 
+            $table->boolean('view')->default(false);
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ const form = useForm({
     born: '',
     status: '',
     team_id: '',
-    game: 'valorant'
+    game: 'valorant',
+    view: true
 })
 
 const submit = () => {

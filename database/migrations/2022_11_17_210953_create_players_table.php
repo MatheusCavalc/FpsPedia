@@ -25,6 +25,7 @@ return new class extends Migration
 
             $table->foreignId('team_id')->constrained();
 
+            $table->boolean('view')->default(false);
             $table->timestamps();
         });
     }

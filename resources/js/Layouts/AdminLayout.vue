@@ -105,6 +105,34 @@
         </Dropdown>
         </template>
 
+        <template v-if="$page.props.auth.user.admin">
+            <Dropdown>
+            <template #trigger>
+            <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+                <div class="flex justify-between w-full items-center">
+                <span class="text-[15px] ml-4 text-gray-200 font-bold">All Contributes</span>
+                <span class="text-sm rotate-180" id="arrow">
+                </span>
+                </div>
+            </div>
+            </template>
+
+            <template #content>
+            <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
+                <Link :href="route('dashboard.contribute.valorant')">
+                    <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Valorant</h1>
+                </Link>
+                <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    Csgo
+                </h1>
+                <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    Rainbow Six
+                </h1>
+            </div>
+            </template>
+            </Dropdown>
+        </template>
+
         <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
             <Link :href="route('logout')" method="post" class="text-[15px] ml-4 text-gray-200 font-bold">Logout</Link>
         </div>
@@ -120,6 +148,9 @@
 
             <!-- Page Content -->
             <main class="m-2 p-8">
+                <div v-if="$page.props.flash.message" class="text-blue-600 mb-4">
+                    {{ $page.props.flash.message }}
+                </div>
                 <slot />
             </main>
 

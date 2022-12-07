@@ -30,7 +30,7 @@
                             </TData>
 
                             <TData type="normal">
-                                {{ player.team_id }}
+                                {{ player.team.name }}
                             </TData>
 
                             <TData type="normal">

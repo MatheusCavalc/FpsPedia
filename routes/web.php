@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\Contribute\ValidateContributeController;
+use App\Http\Controllers\ContributeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 
 
-use App\Http\Controllers\Valorant\PlayerController;
-use App\Http\Controllers\Valorant\TeamController;
+use App\Http\Controllers\Admin\Valorant\PlayerController;
+use App\Http\Controllers\Admin\Valorant\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,5 +76,30 @@ Route::controller(TeamController::class)->middleware(['auth', 'editor'])->prefix
     //Route::delete('/teams/{id}', 'destroy')->name('destroy');
 });
 
+
+//Contribute for user
+Route::controller(ContributeController::class)->middleware(['auth'])->prefix('/contribute')->name('contribute.')->group(function () {
+    Route::get('/{game}/player', 'player')->name('player');
+    Route::post('/player', 'storePlayer')->name('player.store');
+
+    Route::get('/{game}/team', 'team')->name('team');
+    Route::post('/team', 'storeTeam')->name('team.store');
+});
+
+//Contribute for admin
+Route::controller(ValidateContributeController::class)->middleware(['auth', 'editor'])->prefix('dashboard/contribute')->name('dashboard.contribute.')->group(function () {
+    Route::get('/valorant', 'valorantContributes')->name('valorant');
+    Route::get('/valorant/player/{id}', 'showPlayer')->name('valorant.player');
+    Route::put('/valorant/player/approve/{id}', 'playerApprove')->name('valorant.player.approve');
+    Route::delete('/valorant/player/delete/{id}', 'destroyPlayer')->name('valorant.player.destroy');
+
+
+
+    Route::get('/csgo', 'csgoContributes')->name('csgo');
+
+
+
+    Route::get('/rainbowsix', 'rainbowsixContributes')->name('rainbowsix');
+});
 
 require __DIR__.'/auth.php';

@@ -10,9 +10,12 @@ class HomeController extends Controller
 {
     public function valorantAllPlayers()
     {
-        $players = Player::where('game', 'valorant')->get();
+        $players = Player::where('game', 'valorant')
+                         ->where('view', true)
+                         ->with('team')
+                         ->get();
 
-        //dd($players[0]->team->name);
+        //dd($players);
 
         return Inertia::render('Valorant/Players', compact('players'));
     }

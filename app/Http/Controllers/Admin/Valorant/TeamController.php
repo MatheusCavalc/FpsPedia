@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Valorant;
+namespace App\Http\Controllers\Admin\Valorant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
@@ -49,7 +49,8 @@ class TeamController extends Controller
             'status' => 'required',
             'location' => 'required',
             'overview' => 'required',
-            'game' => 'required'
+            'game' => 'required',
+            'view' => 'required'
         ]);
 
         Team::create($data);
@@ -97,7 +98,8 @@ class TeamController extends Controller
             'status' => 'required',
             'location' => 'required',
             'overview' => 'required',
-            'game' => 'required'
+            'game' => 'required',
+            'view' => 'required'
         ]);
 
         Team::findOrFail($id)->update($data);

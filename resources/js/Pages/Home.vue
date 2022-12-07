@@ -1,8 +1,10 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import HomeLayout from '@/Layouts/HomeLayout.vue';
 </script>
 
 <template>
+<HomeLayout>
   <Head title="Home" />
   <div class="container mx-auto px-4 py-4">
     <div class="grid grid-cols-3 gap-4">
@@ -71,5 +73,5 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
         </div>
     </div>
  </div>
-
+</HomeLayout>
 </template>

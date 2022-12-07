@@ -40,7 +40,8 @@ class DatabaseSeeder extends Seeder
             'sub_region' => 'Brazil',
             'status' => 'active',
             'location' => 'United States',
-            'overview' => 'MIBR (also known as Made in Brazil) is a Brazilian professional esports organization owned by Immortals Gaming Club.'
+            'overview' => 'MIBR (also known as Made in Brazil) is a Brazilian professional esports organization owned by Immortals Gaming Club.',
+            'view' => true
         ]);
 
         Player::create([
@@ -50,7 +51,8 @@ class DatabaseSeeder extends Seeder
             'nationality' => 'Brazil',
             'born' => '2003/02/07',
             'status' => 'active',
-            'team_id' => 1
+            'team_id' => 1,
+            'view' => true
         ]);
     }
 }

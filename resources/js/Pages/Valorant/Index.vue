@@ -2,12 +2,12 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import MainLayout from '@/Layouts/MainLayout.vue';
 
-    const props = defineProps(['players'])
+    const props = defineProps(['players', 'id'])
 
 </script>
 
 <template>
-  <MainLayout>
+  <MainLayout :game="id">
     <div class="py-6">
         <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2">
