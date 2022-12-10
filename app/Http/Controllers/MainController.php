@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -23,9 +24,13 @@ class MainController extends Controller
                          ->take(5)
                          ->get();
 
-        //dd($players);
+        $teams = Team::where('game', 'valorant')
+                     ->where('view', true)
+                     ->orderBy('updated_at', 'desc')
+                     ->take(5)
+                     ->get();
 
-        return Inertia::render('Valorant/Index', compact('players', 'id'));
+        return Inertia::render('Valorant/Index', compact('id', 'players', 'teams'));
     }
 
     public function csgo()

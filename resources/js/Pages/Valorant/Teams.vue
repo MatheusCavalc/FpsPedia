@@ -5,7 +5,7 @@
     import TData from '@/Components/TData.vue';
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
-    const { filters } = defineProps(['players'])
+    const { filters } = defineProps(['teams'])
 
 </script>
 
@@ -16,26 +16,26 @@
             <div class="col-span-3">
                 <PlayersTable>
                     <template #headColumns>
-                            <THead type="first" label="ID"/>
-                            <THead type="first" label="Real Name"/>
-                            <THead type="normal" label="Team"/>
-                            <THead type="normal" label="Links"/>
+                            <THead type="first" label="Name"/>
+                            <THead type="first" label="Region"/>
+                            <THead type="normal" label="Sub Region"/>
+                            <THead type="normal" label="Status"/>
                     </template>
                     <template #tableRows>
-                        <tr v-for="(player, index) in players" :key="player.id">
+                        <tr v-for="team in teams" :key="team.id">
                             <TData type="first">
-                                <Link :href="route('home.valorant.player', player.id)" class="hover:underline">{{ player.nickname }}</Link>
+                                <Link :href="route('home.valorant.team', team.id)" class="hover:underline">{{ team.name }}</Link>
                             </TData>
                             <TData type="first">
-                                {{ player.name }}
+                                {{ team.region }}
                             </TData>
 
                             <TData type="normal">
-                                {{ player.team.name }}
+                                {{ team.sub_region }}
                             </TData>
 
                             <TData type="normal">
-                                {{ player.name }}
+                                <p class="capitalize">{{ team.status }}</p>
                             </TData>
                         </tr>
                     </template>

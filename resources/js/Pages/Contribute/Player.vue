@@ -1,13 +1,18 @@
 <script setup>
-import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
+import MainLayout from '@/Layouts/MainLayout.vue';
+import Multiselect from 'vue-multiselect';
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
-const props = defineProps(['game'])
+const props = defineProps(['game', 'teams'])
+
+function teamName({ name, id }) {
+    return `${name}`
+}
 
 const form = useForm({
     nickname: '',
@@ -27,7 +32,7 @@ const submit = () => {
 </script>
 
 <template>
-    <MainLayout :game="id">
+    <MainLayout :game="game">
     <div class="py-6">
         <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2">
@@ -82,7 +87,16 @@ const submit = () => {
 
                     <div class="mb-3">
                         <InputLabel for="team_id" value="Team" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
-                        <TextInput id="team_id" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="form.team_id" required />
+                        <Multiselect
+                            v-model="form.team_id"
+                            :options="teams"
+                            placeholder="Select a team"
+                            :custom-label="teamName"
+                            label="name"
+                            track-by="name"
+                            @input="teamID"
+                            >
+                        </Multiselect>
                         <InputError class="mt-2" :message="form.errors.team_id" />
                     </div>
 

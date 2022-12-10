@@ -25,6 +25,13 @@ class ValidateContributeController extends Controller
         return Inertia::render('Contribute/Admin/Valorant/Player', compact('player'));
     }
 
+    public function showTeam($id)
+    {
+        $team = Team::findOrFail($id);
+
+        return Inertia::render('Contribute/Admin/Valorant/Team', compact('team'));
+    }
+
     public function playerApprove($id)
     {
         Player::findOrFail($id)->update([
@@ -40,6 +47,28 @@ class ValidateContributeController extends Controller
 
         return redirect()->route('dashboard.contribute.valorant')->with('message', 'Player delete');
     }
+
+    public function teamApprove($id)
+    {
+        Team::findOrFail($id)->update([
+            'view' => true
+        ]);
+
+        return redirect()->route('dashboard.contribute.valorant')->with('message', 'Team approve');
+    }
+
+    public function destroyTeam($id)
+    {
+        Team::find($id)->delete();
+
+        return redirect()->route('dashboard.contribute.valorant')->with('message', 'Team delete');
+    }
+
+
+
+
+
+
 
     public function csgoContributes()
     {

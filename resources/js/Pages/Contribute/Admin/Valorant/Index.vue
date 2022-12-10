@@ -26,7 +26,7 @@ const props = defineProps(['players', 'teams'])
                         <tbody>
                             <tr v-for="player in players.data" :key="player.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <Link :href="route('dashboard.contribute.valorant.player', player.id)">
+                                    <Link :href="route('dashboard.contribute.valorant.player', player.id)" class="hover:underline">
                                         {{player.name}}
                                     </Link>
                                 </th>
@@ -58,10 +58,14 @@ const props = defineProps(['players', 'teams'])
                         <tbody>
                             <tr v-for="team in teams.data" :key="team.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{team.name}}
+                                    <Link :href="route('dashboard.contribute.valorant.team', team.id)" class="hover:underline">
+                                        {{team.name}}
+                                    </Link>
                                 </th>
                                 <td class="py-4 px-6">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                    <Link :href="route('dashboard.contribute.valorant.team.destroy', team.id)" method="delete" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" as="button">
+                                        Delete
+                                    </Link>
                                 </td>
                             </tr>
                         </tbody>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Valorant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -29,7 +30,9 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Valorant/Dashboard/Players/Create');
+        $teams = Team::select('id', 'name')->where('game', 'valorant')->limit(15)->get();
+
+        return Inertia::render('Valorant/Dashboard/Players/Create', compact('teams'));
     }
 
     /**
@@ -50,6 +53,8 @@ class PlayerController extends Controller
             'game' => 'required',
             'view' => 'required'
         ]);
+
+        $data['team_id'] = $data['team_id']['id'];
 
         Player::create($data);
 

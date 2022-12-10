@@ -146,8 +146,12 @@ const showingNavigationDropdown = ref(false);
         </Dropdown>
         </div>
 
-        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Pricing</a>
-        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Docs</a>
+        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
+          Transfers <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>
+        </a>
+        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
+          Forum <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>
+        </a>
 
         <div class="relative">
         <Dropdown>
@@ -208,21 +212,13 @@ const showingNavigationDropdown = ref(false);
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                   </svg>
                   <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Events</p>
+                    <p class="text-base font-medium text-gray-900">
+                      Events <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>
+                    </p>
                     <p class="mt-1 text-sm text-gray-500">See what meet-ups and other events we might be planning near you.</p>
                   </div>
                 </a>
 
-                <a href="#" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                  <!-- Heroicon name: outline/shield-check -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
-                  <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Security</p>
-                    <p class="mt-1 text-sm text-gray-500">Understand how we take your privacy seriously.</p>
-                  </div>
-                </a>
               </div>
               <div class="bg-gray-50 px-5 py-5 sm:px-8 sm:py-8">
                 <div>
@@ -402,9 +398,14 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Content -->
             <main class="container mx-auto px-4 py-4">
-                <div v-if="$page.props.flash.message" class="text-blue-600 mb-4">
-                    {{ $page.props.flash.message }}
+                <div v-if="$page.props.flash.message" class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert">
+                    <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Alert</span>
+                    <div>
+                        {{ $page.props.flash.message }}
+                    </div>
                 </div>
+
                 <slot />
             </main>
         </div>

@@ -33,6 +33,10 @@ Route::controller(MainController::class)->name('index.')->group(function () {
 Route::controller(HomeController::class)->name('home.')->group(function () {
     Route::get('/valorant/players', 'valorantAllPlayers')->name('valorant.players');
     Route::get('/valorant/player/{id}', 'valorantPlayer')->name('valorant.player');
+    Route::get('/valorant/teams', 'valorantAllTeams')->name('valorant.teams');
+    Route::get('/valorant/team/{id}', 'valorantTeam')->name('valorant.team');
+
+
 });
 
 
@@ -90,9 +94,14 @@ Route::controller(ContributeController::class)->middleware(['auth'])->prefix('/c
 Route::controller(ValidateContributeController::class)->middleware(['auth', 'editor'])->prefix('dashboard/contribute')->name('dashboard.contribute.')->group(function () {
     Route::get('/valorant', 'valorantContributes')->name('valorant');
     Route::get('/valorant/player/{id}', 'showPlayer')->name('valorant.player');
+    Route::get('/valorant/team/{id}', 'showTeam')->name('valorant.team');
+
+
     Route::put('/valorant/player/approve/{id}', 'playerApprove')->name('valorant.player.approve');
     Route::delete('/valorant/player/delete/{id}', 'destroyPlayer')->name('valorant.player.destroy');
 
+    Route::put('/valorant/team/approve/{id}', 'teamApprove')->name('valorant.team.approve');
+    Route::delete('/valorant/team/delete/{id}', 'destroyTeam')->name('valorant.team.destroy');
 
 
     Route::get('/csgo', 'csgoContributes')->name('csgo');

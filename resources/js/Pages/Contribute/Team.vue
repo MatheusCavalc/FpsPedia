@@ -42,7 +42,7 @@ const submit = () => {
 
 
 <template>
-    <MainLayout :game="id">
+    <MainLayout :game="game">
     <div class="py-6">
         <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2">

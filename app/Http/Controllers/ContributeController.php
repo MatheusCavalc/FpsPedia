@@ -11,7 +11,9 @@ class ContributeController extends Controller
 {
     public function player($game)
     {
-        return Inertia::render('Contribute/Player', compact('game'));
+        $teams = Team::select('id', 'name')->where('game', $game)->limit(15)->get();
+
+        return Inertia::render('Contribute/Player', compact('game', 'teams'));
     }
 
     public function storePlayer(Request $request)
@@ -26,6 +28,8 @@ class ContributeController extends Controller
             'game' => 'required',
             'view' => 'required'
         ]);
+
+        $data['team_id'] = $data['team_id']['id'];
 
         Player::create($data);
 
