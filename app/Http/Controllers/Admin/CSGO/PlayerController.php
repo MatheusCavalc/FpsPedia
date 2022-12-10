@@ -62,7 +62,7 @@ class PlayerController extends Controller
 
         Player::create($data);
 
-        return redirect('/dashboard/csgo/players');
+        return redirect('/dashboard/csgo/players')->with('message', 'Player created!');
     }
 
     /**
@@ -111,7 +111,7 @@ class PlayerController extends Controller
 
         Player::findOrFail($id)->update($data);
 
-        return redirect('/dashboard/csgo/players');
+        return redirect('/dashboard/csgo/players')->with('message', 'Player updated!');;
     }
 
     /**

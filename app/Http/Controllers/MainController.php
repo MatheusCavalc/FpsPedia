@@ -54,7 +54,19 @@ class MainController extends Controller
     public function rainbowsix()
     {
         $id = 'rainbowsix';
-        return Inertia::render('R6/Index', compact('id'));
+        $players = Player::where('game', 'rainbowsix')
+                         ->where('view', true)
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        $teams = Team::where('game', 'rainbowsix')
+                     ->where('view', true)
+                     ->orderBy('updated_at', 'desc')
+                     ->take(5)
+                     ->get();
+
+        return Inertia::render('R6/Index', compact('id', 'players', 'teams'));
     }
 
     public function dashboard()

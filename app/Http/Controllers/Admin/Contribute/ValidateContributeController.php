@@ -64,12 +64,6 @@ class ValidateContributeController extends Controller
         return redirect()->route('dashboard.contribute.valorant')->with('message', 'Team delete');
     }
 
-
-
-
-
-
-
     public function csgoContributes()
     {
         $players = Player::where('game', 'csgo')->where('view', false)->paginate(5);
@@ -93,12 +87,25 @@ class ValidateContributeController extends Controller
         return Inertia::render('Contribute/Admin/Csgo/Team', compact('team'));
     }
 
-
-
-
     public function rainbowsixContributes()
     {
-        $players = Player::where('game', 'rainbowsix')->where('view', false);
-        $teams = Team::where('game', 'rainbowsix')->where('view', false);
+        $players = Player::where('game', 'rainbowsix')->where('view', false)->paginate(5);
+        $teams = Team::where('game', 'rainbowsix')->where('view', false)->paginate(5);
+
+        return Inertia::render('Contribute/Admin/R6/Index', compact('players', 'teams'));
+    }
+
+    public function showRainbowsixPlayer($id)
+    {
+        $player = Player::with('team')->findOrFail($id);
+
+        return Inertia::render('Contribute/Admin/Csgo/Player', compact('player'));
+    }
+
+    public function showRainbowsixTeam($id)
+    {
+        $team = Team::findOrFail($id);
+
+        return Inertia::render('Contribute/Admin/Csgo/Team', compact('team'));
     }
 }

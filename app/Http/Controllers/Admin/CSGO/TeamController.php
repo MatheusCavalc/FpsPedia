@@ -54,7 +54,7 @@ class TeamController extends Controller
 
         Team::create($data);
 
-        return redirect('/dashboard/csgo/teams');
+        return redirect('/dashboard/csgo/teams')->with('message', 'Team created!');;
     }
 
     /**
@@ -103,7 +103,7 @@ class TeamController extends Controller
 
         Team::findOrFail($id)->update($data);
 
-        return redirect('/dashboard/csgo/teams');
+        return redirect('/dashboard/csgo/teams')->with('message', 'Team updated!');;
     }
 
     /**

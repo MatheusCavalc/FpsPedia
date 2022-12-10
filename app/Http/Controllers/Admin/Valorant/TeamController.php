@@ -55,7 +55,7 @@ class TeamController extends Controller
 
         Team::create($data);
 
-        return redirect('/dashboard/valorant/teams');
+        return redirect('/dashboard/valorant/teams')->with('message', 'Team created!');;
     }
 
     /**
@@ -104,7 +104,7 @@ class TeamController extends Controller
 
         Team::findOrFail($id)->update($data);
 
-        return redirect('/dashboard/valorant/teams');
+        return redirect('/dashboard/valorant/teams')->with('message', 'Team updated!');;
     }
 
     /**

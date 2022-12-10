@@ -77,4 +77,37 @@ class HomeController extends Controller
         return Inertia::render('Csgo/Team', compact('team'));
     }
 
+    public function rainbowsixAllPlayers()
+    {
+        $players = Player::where('game', 'rainbowsix')
+                         ->where('view', true)
+                         ->with('team')
+                         ->get();
+
+        return Inertia::render('R6/Players', compact('players'));
+    }
+
+    public function rainbowsixPlayer($id)
+    {
+        $player = Player::with('team')->findOrFail($id);
+
+        return Inertia::render('R6/Player', compact('player'));
+    }
+
+    public function rainbowsixAllTeams()
+    {
+        $teams = Team::where('game', 'rainbowsix')
+                         ->where('view', true)
+                         ->get();
+
+        return Inertia::render('R6/Teams', compact('teams'));
+    }
+
+    public function rainbowsixTeam($id)
+    {
+        $team = Team::findOrFail($id);
+
+        return Inertia::render('R6/Team', compact('team'));
+    }
+
 }
