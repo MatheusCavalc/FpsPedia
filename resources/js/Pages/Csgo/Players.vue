@@ -24,14 +24,18 @@
                     <template #tableRows>
                         <tr v-for="(player, index) in players" :key="player.id">
                             <TData type="first">
-                                <Link :href="route('home.csgo.player', player.id)" class="hover:underline">{{ player.nickname }}</Link>
+                                <Link :href="route('home.csgo.player', player.id)" class="hover:underline">
+                                    {{ player.nickname }}
+                                </Link>
                             </TData>
                             <TData type="first">
                                 {{ player.name }}
                             </TData>
 
                             <TData type="normal">
-                                {{ player.team.name }}
+                                <Link :href="route('home.csgo.team', player.team.id)" class="hover:underline">
+                                    {{ player.team.name }}
+                                </Link>
                             </TData>
 
                             <TData type="normal">

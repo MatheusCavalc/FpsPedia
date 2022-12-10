@@ -31,7 +31,9 @@
                             </TData>
 
                             <TData type="normal">
-                                {{ player.team.name }}
+                                <Link :href="route('home.valorant.team', player.team.id)" class="hover:underline">
+                                    {{ player.team.name }}
+                                </Link>
                             </TData>
 
                             <TData type="normal">
