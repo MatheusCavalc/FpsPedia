@@ -1,21 +1,13 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
-const form = useForm({
-    name: '',
-    region: '',
-    sub_region: '',
-    status: '',
-    location: '',
-    overview: '',
-    game: 'valorant',
-    view: true
-})
+const props = defineProps(['team']);
 
 let sub = []
 
@@ -30,16 +22,16 @@ function onChange(event) {
     return sub;
 }
 
+const form = useForm(props.team)
+
 const submit = () => {
-    form.post(route('dashboard.valorant.teams.store'), {
-        onFinish: () => form.reset('name', 'region', 'sub_region', 'status', 'location', 'overview', 'game'),
-    });
+    form.put(route('dashboard.csgo.teams.update', props.team.id))
 }
 
 </script>
 
 <template>
-    <Head title="Create Team" />
+    <Head title="Create Player" />
 
     <AdminLayout>
         <div class="py-6">
@@ -47,7 +39,7 @@ const submit = () => {
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
 
-                        <h1 class="text-3xl">Create New Team</h1>
+                        <h1 class="text-3xl">Edit Team</h1>
 
                         <form @submit.prevent="submit">
 
@@ -104,7 +96,7 @@ const submit = () => {
                                 <div class="mb-3">
                                     <InputLabel for="game" value="Game" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
                                     <select id="game" v-model="form.game" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="valorant">Valorant</option>
+                                        <option selected value="csgo">CSGO</option>
                                     </select>
                                     <InputError class="mt-2" :message="form.errors.game" />
                                 </div>

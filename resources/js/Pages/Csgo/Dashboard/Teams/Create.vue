@@ -13,7 +13,7 @@ const form = useForm({
     status: '',
     location: '',
     overview: '',
-    game: 'valorant',
+    game: 'csgo',
     view: true
 })
 
@@ -31,9 +31,7 @@ function onChange(event) {
 }
 
 const submit = () => {
-    form.post(route('dashboard.valorant.teams.store'), {
-        onFinish: () => form.reset('name', 'region', 'sub_region', 'status', 'location', 'overview', 'game'),
-    });
+    form.post(route('dashboard.csgo.teams.store'));
 }
 
 </script>
@@ -104,7 +102,7 @@ const submit = () => {
                                 <div class="mb-3">
                                     <InputLabel for="game" value="Game" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
                                     <select id="game" v-model="form.game" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="valorant">Valorant</option>
+                                        <option selected value="csgo">CSGO</option>
                                     </select>
                                     <InputError class="mt-2" :message="form.errors.game" />
                                 </div>

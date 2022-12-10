@@ -44,4 +44,37 @@ class HomeController extends Controller
         return Inertia::render('Valorant/Team', compact('team'));
     }
 
+    public function csgoAllPlayers()
+    {
+        $players = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->with('team')
+                         ->get();
+
+        return Inertia::render('Csgo/Players', compact('players'));
+    }
+
+    public function csgoPlayer($id)
+    {
+        $player = Player::with('team')->findOrFail($id);
+
+        return Inertia::render('Csgo/Player', compact('player'));
+    }
+
+    public function csgoAllTeams()
+    {
+        $teams = Team::where('game', 'csgo')
+                         ->where('view', true)
+                         ->get();
+
+        return Inertia::render('Csgo/Teams', compact('teams'));
+    }
+
+    public function csgoTeam($id)
+    {
+        $team = Team::findOrFail($id);
+
+        return Inertia::render('Csgo/Team', compact('team'));
+    }
+
 }

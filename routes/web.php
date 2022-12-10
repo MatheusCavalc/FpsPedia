@@ -5,9 +5,14 @@ use App\Http\Controllers\ContributeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 
-
 use App\Http\Controllers\Admin\Valorant\PlayerController;
 use App\Http\Controllers\Admin\Valorant\TeamController;
+
+use App\Http\Controllers\Admin\CSGO\PlayerController as CSGOPlayerController;
+use App\Http\Controllers\Admin\CSGO\TeamController as CSGOTeamController;
+
+use App\Http\Controllers\Admin\RainbowSix\PlayerController as RainbowSixPlayerController;
+use App\Http\Controllers\Admin\RainbowSix\TeamController as RainbowSixTeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +41,10 @@ Route::controller(HomeController::class)->name('home.')->group(function () {
     Route::get('/valorant/teams', 'valorantAllTeams')->name('valorant.teams');
     Route::get('/valorant/team/{id}', 'valorantTeam')->name('valorant.team');
 
-
+    Route::get('/csgo/players', 'csgoAllPlayers')->name('csgo.players');
+    Route::get('/csgo/player/{id}', 'csgoPlayer')->name('csgo.player');
+    Route::get('/csgo/teams', 'csgoAllTeams')->name('csgo.teams');
+    Route::get('/csgo/team/{id}', 'csgoTeam')->name('csgo.team');
 });
 
 
@@ -80,6 +88,63 @@ Route::controller(TeamController::class)->middleware(['auth', 'editor'])->prefix
     //Route::delete('/teams/{id}', 'destroy')->name('destroy');
 });
 
+//Players CSGO
+Route::controller(CSGOPlayerController::class)->middleware(['auth', 'editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.players.')->group(function () {
+    Route::get('/players', 'index')->name('index');//todos os jogadores
+    Route::get('/players/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/players', 'store')->name('store');
+    //Route::get('/players/{id}', 'show')->name('show');
+    Route::get('/players/edit/{id}', 'edit')->name('edit');
+    Route::put('/players/update/{id}', 'update')->name('update');
+    //Route::delete('/players/{id}', 'destroy')->name('destroy');
+});
+
+//Teams CSGO
+Route::controller(CSGOTeamController::class)->middleware(['auth', 'editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.teams.')->group(function () {
+    Route::get('/teams', 'index')->name('index');//todos os jogadores
+    Route::get('/teams/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/teams', 'store')->name('store');
+    //Route::get('/teams/{id}', 'show')->name('show');
+    Route::get('/teams/edit/{id}', 'edit')->name('edit');
+    Route::put('/teams/update/{id}', 'update')->name('update');
+    //Route::delete('/teams/{id}', 'destroy')->name('destroy');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Contribute for user
 Route::controller(ContributeController::class)->middleware(['auth'])->prefix('/contribute')->name('contribute.')->group(function () {
@@ -105,7 +170,8 @@ Route::controller(ValidateContributeController::class)->middleware(['auth', 'edi
 
 
     Route::get('/csgo', 'csgoContributes')->name('csgo');
-
+    Route::get('/csgo/player/{id}', 'showCsgoPlayer')->name('csgo.player');
+    Route::get('/csgo/team/{id}', 'showCsgoTeam')->name('csgo.team');
 
 
     Route::get('/rainbowsix', 'rainbowsixContributes')->name('rainbowsix');

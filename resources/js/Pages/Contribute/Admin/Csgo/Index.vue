@@ -27,7 +27,7 @@ const props = defineProps(['players', 'teams'])
                             <tr v-for="player in players.data" :key="player.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <Link :href="route('dashboard.contribute.valorant.player', player.id)" class="hover:underline">
-                                        {{player.nickname}}
+                                        {{player.name}}
                                     </Link>
                                 </th>
                                 <td class="py-4 px-6">

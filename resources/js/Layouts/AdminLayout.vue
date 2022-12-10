@@ -38,9 +38,9 @@
             <Link :href="route('dashboard.valorant.teams.index')">
               <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Teams</h1>
             </Link>
-            <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-            <Link :href="route('dashboard.valorant.players.index')">Players</Link>
-            </h1>
+            <Link :href="route('dashboard.valorant.players.index')">
+              <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Players</h1>
+            </Link>
             <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
             Tournaments
             </h1>
@@ -63,12 +63,12 @@
 
         <template #content>
         <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
-            <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-            Teams
-            </h1>
-            <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-            Players
-            </h1>
+            <Link :href="route('dashboard.csgo.teams.index')">
+              <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Teams</h1>
+            </Link>
+            <Link :href="route('dashboard.csgo.players.index')">
+              <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Players</h1>
+            </Link>
             <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
             Tournaments
             </h1>
@@ -122,9 +122,9 @@
                 <Link :href="route('dashboard.contribute.valorant')">
                     <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">Valorant</h1>
                 </Link>
-                <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-                    Csgo
-                </h1>
+                <Link :href="route('dashboard.contribute.csgo')">
+                    <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">CSGO</h1>
+                </Link>
                 <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
                     Rainbow Six
                 </h1>

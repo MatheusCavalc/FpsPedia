@@ -40,8 +40,8 @@ import HomeLayout from '@/Layouts/HomeLayout.vue';
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2 hover:underline"><Link :href="route('index.csgo')">CS:GO</Link></div>
                 <ul class="list-none">
-                    <p><Link class="text-gray-700 hover:text-sky-400 hover:underline text-base">Teams</Link></p>
-                    <p><Link class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
+                    <p><Link :href="route('home.csgo.teams')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Teams</Link></p>
+                    <p><Link :href="route('home.csgo.players')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
                     <p>
                         <Link class="text-gray-700 hover:text-sky-400 hover:underline text-base">
                         Tournaments <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>

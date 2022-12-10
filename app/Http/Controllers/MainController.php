@@ -35,13 +35,25 @@ class MainController extends Controller
 
     public function csgo()
     {
-        $id = 'CSGO';
-        return Inertia::render('Csgo/Index', compact('id'));
+        $id = 'csgo';
+        $players = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        $teams = Team::where('game', 'csgo')
+                     ->where('view', true)
+                     ->orderBy('updated_at', 'desc')
+                     ->take(5)
+                     ->get();
+
+        return Inertia::render('Csgo/Index', compact('id', 'players', 'teams'));
     }
 
     public function rainbowsix()
     {
-        $id = 'Rainbow Six';
+        $id = 'rainbowsix';
         return Inertia::render('R6/Index', compact('id'));
     }
 
