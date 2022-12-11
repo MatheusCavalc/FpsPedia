@@ -2,6 +2,11 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\CsgoEditor;
+use App\Http\Middleware\DashboardAuthorize;
+use App\Http\Middleware\RainbowSixEditor;
+use App\Http\Middleware\ValorantEditor;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,6 +70,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'editor' => \App\Http\Middleware\Editors::class,
+        'admin' => Admin::class,
+        'dashboard' => DashboardAuthorize::class,
+        'valorant_editor' => ValorantEditor::class,
+        'csgo_editor' => CsgoEditor::class,
+        'rainbowsix_editor' => RainbowSixEditor::class
     ];
 }

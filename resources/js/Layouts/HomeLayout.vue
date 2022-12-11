@@ -51,7 +51,7 @@ const showingNavigationDropdown = ref(false);
                 </template>
 
                 <template #content>
-                    <Link v-if="$page.props.auth.user.admin" :href="route('index.dashboard')" class="text-base font-medium text-gray-900">
+                    <Link v-if="$page.props.auth.user.admin || $page.props.auth.user.editor != 'none'" :href="route('index.dashboard')" class="text-base font-medium text-gray-900">
                         <div class="ml-4">
                             <p class="text-base font-medium text-gray-900">Dashboard</p>
                         </div>

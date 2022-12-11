@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Editors
+class CsgoEditor
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class Editors
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->editor == 'none' || !auth()->user()->admin) {
-            abort(404);
+        if (auth()->user()->editor == 'csgo' || auth()->user()->admin == true) {
+            return $next($request);
         }
 
-        return $next($request);
+        abort(404);
     }
 }

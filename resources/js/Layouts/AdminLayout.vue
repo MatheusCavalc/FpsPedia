@@ -133,6 +133,31 @@
             </Dropdown>
         </template>
 
+        <template v-if="$page.props.auth.user.admin">
+            <Dropdown>
+            <template #trigger>
+            <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+                <div class="flex justify-between w-full items-center">
+                <span class="text-[15px] ml-4 text-gray-200 font-bold">Change Roles</span>
+                <span class="text-sm rotate-180" id="arrow">
+                </span>
+                </div>
+            </div>
+            </template>
+
+            <template #content>
+            <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
+                <Link :href="route('dashboard.newadmin')">
+                    <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">New Admin</h1>
+                </Link>
+                <Link :href="route('dashboard.neweditor')">
+                    <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">New Editor</h1>
+                </Link>
+            </div>
+            </template>
+            </Dropdown>
+        </template>
+
         <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
             <Link :href="route('logout')" method="post" class="text-[15px] ml-4 text-gray-200 font-bold">Logout</Link>
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Contribute\ValidateContributeController;
 use App\Http\Controllers\ContributeController;
 use App\Http\Controllers\HomeController;
@@ -32,7 +33,7 @@ Route::controller(MainController::class)->name('index.')->group(function () {
     Route::get('/valorant/Home', 'valorant')->name('valorant');
     Route::get('/csgo/Home', 'csgo')->name('csgo');
     Route::get('/rainbowsix/Home', 'rainbowsix')->name('rainbowsix');
-    Route::get('/dashboard', 'dashboard')->middleware(['auth', 'editor'])->name('dashboard');
+    Route::get('/dashboard', 'dashboard')->middleware(['auth', 'dashboard'])->name('dashboard');
 });
 
 Route::controller(HomeController::class)->name('home.')->group(function () {
@@ -72,7 +73,7 @@ Route::controller(HomeController::class)->name('home.')->group(function () {
 
 //Dashboard - Paginas de Editores e Administradores
 //Players Valorant
-Route::controller(PlayerController::class)->middleware(['auth', 'editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.players.')->group(function () {
+Route::controller(PlayerController::class)->middleware(['auth', 'valorant_editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.players.')->group(function () {
     Route::get('/players', 'index')->name('index');//todos os jogadores
     Route::get('/players/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/players', 'store')->name('store');
@@ -83,7 +84,7 @@ Route::controller(PlayerController::class)->middleware(['auth', 'editor'])->pref
 });
 
 //Teams Valorant
-Route::controller(TeamController::class)->middleware(['auth', 'editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.teams.')->group(function () {
+Route::controller(TeamController::class)->middleware(['auth', 'valorant_editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.teams.')->group(function () {
     Route::get('/teams', 'index')->name('index');//todos os jogadores
     Route::get('/teams/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/teams', 'store')->name('store');
@@ -94,7 +95,7 @@ Route::controller(TeamController::class)->middleware(['auth', 'editor'])->prefix
 });
 
 //Players CSGO
-Route::controller(CSGOPlayerController::class)->middleware(['auth', 'editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.players.')->group(function () {
+Route::controller(CSGOPlayerController::class)->middleware(['auth', 'csgo_editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.players.')->group(function () {
     Route::get('/players', 'index')->name('index');//todos os jogadores
     Route::get('/players/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/players', 'store')->name('store');
@@ -105,7 +106,7 @@ Route::controller(CSGOPlayerController::class)->middleware(['auth', 'editor'])->
 });
 
 //Teams CSGO
-Route::controller(CSGOTeamController::class)->middleware(['auth', 'editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.teams.')->group(function () {
+Route::controller(CSGOTeamController::class)->middleware(['auth', 'csgo_editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.teams.')->group(function () {
     Route::get('/teams', 'index')->name('index');//todos os jogadores
     Route::get('/teams/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/teams', 'store')->name('store');
@@ -116,7 +117,7 @@ Route::controller(CSGOTeamController::class)->middleware(['auth', 'editor'])->pr
 });
 
 //Players R6
-Route::controller(RainbowSixPlayerController::class)->middleware(['auth', 'editor'])->prefix('dashboard/rainbowsix')->name('dashboard.rainbowsix.players.')->group(function () {
+Route::controller(RainbowSixPlayerController::class)->middleware(['auth', 'rainbowsix_editor'])->prefix('dashboard/rainbowsix')->name('dashboard.rainbowsix.players.')->group(function () {
     Route::get('/players', 'index')->name('index');//todos os jogadores
     Route::get('/players/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/players', 'store')->name('store');
@@ -127,7 +128,7 @@ Route::controller(RainbowSixPlayerController::class)->middleware(['auth', 'edito
 });
 
 //Teams R6
-Route::controller(RainbowSixTeamController::class)->middleware(['auth', 'editor'])->prefix('dashboard/rainbowsix')->name('dashboard.rainbowsix.teams.')->group(function () {
+Route::controller(RainbowSixTeamController::class)->middleware(['auth', 'rainbowsix_editor'])->prefix('dashboard/rainbowsix')->name('dashboard.rainbowsix.teams.')->group(function () {
     Route::get('/teams', 'index')->name('index');//todos os jogadores
     Route::get('/teams/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
     Route::post('/teams', 'store')->name('store');
@@ -143,6 +144,13 @@ Route::controller(RainbowSixTeamController::class)->middleware(['auth', 'editor'
 
 
 
+Route::controller(AdminController::class)->middleware(['auth', 'admin'])->prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/neweditor', 'newEditor')->name('neweditor');
+    Route::get('/newadmin', 'newAdmin')->name('newadmin');
+
+    Route::put('/neweditor', 'makeEditor')->name('new.editor');
+    Route::put('/newadmin', 'makeAdmin')->name('new.admin');
+});
 
 
 
@@ -181,7 +189,7 @@ Route::controller(ContributeController::class)->middleware(['auth'])->prefix('/c
 });
 
 //Contribute for admin
-Route::controller(ValidateContributeController::class)->middleware(['auth', 'editor'])->prefix('dashboard/contribute')->name('dashboard.contribute.')->group(function () {
+Route::controller(ValidateContributeController::class)->middleware(['auth', 'admin'])->prefix('dashboard/contribute')->name('dashboard.contribute.')->group(function () {
     Route::get('/valorant', 'valorantContributes')->name('valorant');
     Route::get('/valorant/player/{id}', 'showPlayer')->name('valorant.player');
     Route::get('/valorant/team/{id}', 'showTeam')->name('valorant.team');
