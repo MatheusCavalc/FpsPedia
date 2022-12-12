@@ -5,12 +5,12 @@
     import TData from '@/Components/TData.vue';
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
-    const { filters } = defineProps(['teams'])
+    const { filters } = defineProps(['teams', 'trendings'])
 
 </script>
 
 <template>
-  <MainLayout>
+  <MainLayout :game="teams[0].game" :trendings="trendings">
     <div class="py-6">
         <div class="grid grid-cols-4 gap-4">
             <div class="col-span-3">

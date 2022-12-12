@@ -1,12 +1,12 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
 
-const props = defineProps(['team'])
+const props = defineProps(['team', 'trendings'])
 
 </script>
 
 <template>
- <MainLayout :game="team.game">
+ <MainLayout :game="team.game" :trendings="trendings">
         <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2">
                 <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">

@@ -20,6 +20,7 @@ class MainController extends Controller
         $id = 'valorant';
         $players = Player::where('game', 'valorant')
                          ->where('view', true)
+                         ->with('team')
                          ->orderBy('updated_at', 'desc')
                          ->take(5)
                          ->get();

@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <MainLayout :game="id">
+  <MainLayout :game="id" :trendings="players">
     <div class="py-6">
         <div class="grid grid-cols-3 gap-4">
             <div class="col-span-3">

@@ -6,7 +6,7 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
-const props = defineProps(['game'])
+const props = defineProps(['game', 'trendings'])
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -34,11 +34,12 @@ const showingNavigationDropdown = ref(false);
       </div>
       <nav class="hidden space-x-10 md:flex">
         <div class="relative">
+
         <Dropdown>
           <template #trigger>
           <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
           <button type="button" class="text-gray-500 group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" aria-expanded="false">
-            <span>Solutions</span>
+            <span>Trending</span>
             <!--
               Heroicon name: mini/chevron-down
 
@@ -63,62 +64,20 @@ const showingNavigationDropdown = ref(false);
           <template #content>
           <div class="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform px-2 sm:px-0 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2">
             <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-              <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+
+              <div v-for="player in trendings" :key="player.id" class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                 <a href="#" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
                   <!-- Heroicon name: outline/chart-bar -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Analytics</p>
-                    <p class="mt-1 text-sm text-gray-500">Get a better understanding of where your traffic is coming from.</p>
-                  </div>
-                </a>
-
-                <a href="#" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                  <!-- Heroicon name: outline/cursor-arrow-rays -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
-                  </svg>
-                  <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Engagement</p>
-                    <p class="mt-1 text-sm text-gray-500">Speak directly to your customers in a more meaningful way.</p>
-                  </div>
-                </a>
-
-                <a href="#" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                  <!-- Heroicon name: outline/shield-check -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
-                  <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Security</p>
-                    <p class="mt-1 text-sm text-gray-500">Your customers&#039; data will be safe and secure.</p>
-                  </div>
-                </a>
-
-                <a href="#" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                  <!-- Heroicon name: outline/squares-2x2 -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                  </svg>
-                  <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Integrations</p>
-                    <p class="mt-1 text-sm text-gray-500">Connect with third-party tools that you&#039;re already using.</p>
-                  </div>
-                </a>
-
-                <a href="#" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                  <!-- Heroicon name: outline/arrow-path -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l3-3m12 3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.657 48.657 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l-3 3m3-3l3 3" />
-                  </svg>
-                  <div class="ml-4">
-                    <p class="text-base font-medium text-gray-900">Automations</p>
-                    <p class="mt-1 text-sm text-gray-500">Build strategic funnels that will drive your customers to convert</p>
+                    <p class="text-base font-medium text-gray-900">{{player.nickname}}</p>
+                    <p class="mt-1 text-sm text-gray-500">{{player.team.name}}</p>
                   </div>
                 </a>
               </div>
+
               <div class="space-y-6 bg-gray-50 px-5 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
                 <div class="flow-root">
                   <a href="#" class="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100">
@@ -186,8 +145,8 @@ const showingNavigationDropdown = ref(false);
               <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                 <Link :href="route('contribute.player', props.game)" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
                   <!-- Heroicon name: outline/lifebuoy -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 00-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 010 9.424m-4.138-5.976a3.736 3.736 0 00-.88-1.388 3.737 3.737 0 00-1.388-.88m2.268 2.268a3.765 3.765 0 010 2.528m-2.268-4.796a3.765 3.765 0 00-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 01-1.388.88m2.268-2.268l4.138 3.448m0 0a9.027 9.027 0 01-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0l-3.448-4.138m3.448 4.138a9.014 9.014 0 01-9.424 0m5.976-4.138a3.765 3.765 0 01-2.528 0m0 0a3.736 3.736 0 01-1.388-.88 3.737 3.737 0 01-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 01-1.652-1.306 9.027 9.027 0 01-1.306-1.652m0 0l4.138-3.448M4.33 16.712a9.014 9.014 0 010-9.424m4.138 5.976a3.765 3.765 0 010-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 011.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 00-1.652 1.306A9.025 9.025 0 004.33 7.288" />
+                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                   </svg>
                   <div class="ml-4">
                     <p class="text-base font-medium text-gray-900">Contribute with {{props.game}} player</p>
@@ -197,8 +156,8 @@ const showingNavigationDropdown = ref(false);
 
                 <Link :href="route('contribute.team', props.game)" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
                   <!-- Heroicon name: outline/bookmark-square -->
-                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
+                  <svg class="h-6 w-6 flex-shrink-0 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                   </svg>
                   <div class="ml-4">
                     <p class="text-base font-medium text-gray-900">Contribute with {{props.game}} team</p>
@@ -220,9 +179,11 @@ const showingNavigationDropdown = ref(false);
                 </a>
 
               </div>
+
+              <!-- RECENTS EVENTS
               <div class="bg-gray-50 px-5 py-5 sm:px-8 sm:py-8">
                 <div>
-                  <h3 class="text-base font-medium text-gray-500">Recent Posts</h3>
+                  <h3 class="text-base font-medium text-gray-500">Recent Events</h3>
                   <ul role="list" class="mt-4 space-y-4">
                     <li class="truncate text-base">
                       <a href="#" class="font-medium text-gray-900 hover:text-gray-700">Boost your conversion rate</a>
@@ -239,11 +200,13 @@ const showingNavigationDropdown = ref(false);
                 </div>
                 <div class="mt-5 text-sm">
                   <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                    View all posts
+                    View all events
                     <span aria-hidden="true"> &rarr;</span>
                   </a>
                 </div>
               </div>
+            -->
+
             </div>
           </div>
           </template>

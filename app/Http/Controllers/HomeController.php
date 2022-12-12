@@ -16,16 +16,28 @@ class HomeController extends Controller
                          ->with('team')
                          ->get();
 
-        //dd($players);
+        $trendings = Player::where('game', 'valorant')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
 
-        return Inertia::render('Valorant/Players', compact('players'));
+        return Inertia::render('Valorant/Players', compact('players', 'trendings'));
     }
 
     public function valorantPlayer($id)
     {
         $player = Player::with('team')->findOrFail($id);
 
-        return Inertia::render('Valorant/Player', compact('player'));
+        $trendings = Player::where('game', 'valorant')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('Valorant/Player', compact('player', 'trendings'));
     }
 
     public function valorantAllTeams()
@@ -34,14 +46,28 @@ class HomeController extends Controller
                          ->where('view', true)
                          ->get();
 
-        return Inertia::render('Valorant/Teams', compact('teams'));
+        $trendings = Player::where('game', 'valorant')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('Valorant/Teams', compact('teams', 'trendings'));
     }
 
     public function valorantTeam($id)
     {
         $team = Team::findOrFail($id);
 
-        return Inertia::render('Valorant/Team', compact('team'));
+        $trendings = Player::where('game', 'valorant')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('Valorant/Team', compact('team', 'trendings'));
     }
 
     public function csgoAllPlayers()
@@ -51,14 +77,28 @@ class HomeController extends Controller
                          ->with('team')
                          ->get();
 
-        return Inertia::render('Csgo/Players', compact('players'));
+        $trendings = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('Csgo/Players', compact('players', 'trendings'));
     }
 
     public function csgoPlayer($id)
     {
         $player = Player::with('team')->findOrFail($id);
 
-        return Inertia::render('Csgo/Player', compact('player'));
+        $trendings = Player::where('game', 'csgo')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('Csgo/Player', compact('player', 'trendings'));
     }
 
     public function csgoAllTeams()
@@ -67,14 +107,28 @@ class HomeController extends Controller
                          ->where('view', true)
                          ->get();
 
-        return Inertia::render('Csgo/Teams', compact('teams'));
+        $trendings = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('Csgo/Teams', compact('teams', 'trendings'));
     }
 
     public function csgoTeam($id)
     {
         $team = Team::findOrFail($id);
 
-        return Inertia::render('Csgo/Team', compact('team'));
+        $trendings = Player::where('game', 'csgo')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('Csgo/Team', compact('team', 'trendings'));
     }
 
     public function rainbowsixAllPlayers()
@@ -84,14 +138,28 @@ class HomeController extends Controller
                          ->with('team')
                          ->get();
 
-        return Inertia::render('R6/Players', compact('players'));
+        $trendings = Player::where('game', 'rainbowsix')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('R6/Players', compact('players', 'trendings'));
     }
 
     public function rainbowsixPlayer($id)
     {
         $player = Player::with('team')->findOrFail($id);
 
-        return Inertia::render('R6/Player', compact('player'));
+        $trendings = Player::where('game', 'rainbowsix')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('R6/Player', compact('player', 'trendings'));
     }
 
     public function rainbowsixAllTeams()
@@ -100,14 +168,28 @@ class HomeController extends Controller
                          ->where('view', true)
                          ->get();
 
-        return Inertia::render('R6/Teams', compact('teams'));
+        $trendings = Player::where('game', 'rainbowsix')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('R6/Teams', compact('teams', 'trendings'));
     }
 
     public function rainbowsixTeam($id)
     {
         $team = Team::findOrFail($id);
 
-        return Inertia::render('R6/Team', compact('team'));
+        $trendings = Player::where('game', 'rainbowsix')
+                            ->where('view', true)
+                            ->with('team')
+                            ->orderBy('updated_at', 'desc')
+                            ->take(5)
+                            ->get();
+
+        return Inertia::render('R6/Team', compact('team', 'trendings'));
     }
 
 }
