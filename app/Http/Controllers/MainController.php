@@ -39,6 +39,7 @@ class MainController extends Controller
         $id = 'csgo';
         $players = Player::where('game', 'csgo')
                          ->where('view', true)
+                         ->with('team')
                          ->orderBy('updated_at', 'desc')
                          ->take(5)
                          ->get();
@@ -57,6 +58,7 @@ class MainController extends Controller
         $id = 'rainbowsix';
         $players = Player::where('game', 'rainbowsix')
                          ->where('view', true)
+                         ->with('team')
                          ->orderBy('updated_at', 'desc')
                          ->take(5)
                          ->get();

@@ -56,7 +56,7 @@ const showingNavigationDropdown = ref(false);
                             <p class="text-base font-medium text-gray-900">Dashboard</p>
                         </div>
                     </Link>
-                    <Link :href="route('logout')" method="post" class="text-base font-medium text-gray-900">
+                    <Link :href="route('logout')" method="post" as="button" class="text-base font-medium text-gray-900">
                         <div class="ml-4">
                             <p class="text-base font-medium text-gray-900">Logout</p>
                         </div>
