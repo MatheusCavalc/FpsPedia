@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\RainbowSix;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TeamController extends Controller
@@ -49,8 +51,11 @@ class TeamController extends Controller
             'location' => 'required',
             'overview' => 'required',
             'game' => 'required',
-            'view' => 'required'
+            'view' => 'required',
+            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
         ]);
+
+        $data['media'] = FacadesRequest::file('media')->store('teams', 'public');
 
         Team::create($data);
 
@@ -77,8 +82,9 @@ class TeamController extends Controller
     public function edit($id)
     {
         $team = Team::findOrFail($id);
+        $image = asset('storage/'. $team->media);
 
-        return Inertia::render('R6/Dashboard/Teams/Edit', compact('team'));
+        return Inertia::render('R6/Dashboard/Teams/Edit', compact('team', 'image'));
     }
 
     /**
@@ -98,8 +104,16 @@ class TeamController extends Controller
             'location' => 'required',
             'overview' => 'required',
             'game' => 'required',
-            'view' => 'required'
+            'view' => 'required',
+            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
         ]);
+
+        $data['media'] = $request->media;
+
+        if(FacadesRequest::file('media')) {
+            Storage::delete('public/teams/'. $request->media);
+            $data['media'] = FacadesRequest::file('media')->store('teams', 'public');
+        }
 
         Team::findOrFail($id)->update($data);
 

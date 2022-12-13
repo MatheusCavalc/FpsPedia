@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class PlayerController extends Controller
@@ -55,10 +57,13 @@ class PlayerController extends Controller
             'status' => 'required',
             'team_id' => 'required',
             'game' => 'required',
-            'view' => 'required'
+            'view' => 'required',
+            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
         ]);
 
         $data['team_id'] = $data['team_id']['id'];
+
+        $data['media'] = FacadesRequest::file('media')->store('players', 'public');
 
         Player::create($data);
 
@@ -85,8 +90,9 @@ class PlayerController extends Controller
     public function edit($id)
     {
         $player = Player::findOrFail($id);
+        $image = asset('storage/'. $player->media);
 
-        return Inertia::render('Csgo/Dashboard/Players/Edit', compact('player'));
+        return Inertia::render('Csgo/Dashboard/Players/Edit', compact('player', 'image'));
     }
 
     /**
@@ -106,8 +112,16 @@ class PlayerController extends Controller
             'status' => 'required',
             'team_id' => 'required',
             'game' => 'required',
-            'view' => 'required'
+            'view' => 'required',
+            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
         ]);
+
+        $data['media'] = $request->media;
+
+        if(FacadesRequest::file('media')) {
+            Storage::delete('public/teams/'. $request->media);
+            $data['media'] = FacadesRequest::file('media')->store('players', 'public');
+        }
 
         Player::findOrFail($id)->update($data);
 

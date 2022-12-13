@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('nationality');
             $table->date('born');
             $table->enum('status', ['active', 'inactive', 'retired']);
+            $table->string('media')->nullable();
 
             $table->foreignId('team_id')->constrained();
 

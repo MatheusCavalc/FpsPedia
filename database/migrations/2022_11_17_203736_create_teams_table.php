@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'inactive']);
             $table->string('location');
             $table->longText('overview');
+            $table->string('media')->nullable();
 
             $table->boolean('view')->default(false);
             $table->timestamps();

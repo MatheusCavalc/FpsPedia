@@ -1,13 +1,13 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-
+import { Inertia } from '@inertiajs/inertia';
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
-const props = defineProps(['team']);
+const props = defineProps(['team', 'image']);
 
 let sub = []
 
@@ -22,10 +22,31 @@ function onChange(event) {
     return sub;
 }
 
-const form = useForm(props.team)
+const form = useForm({
+    name: props.team.name,
+    region: props.team.region,
+    sub_region: props.team.sub_region,
+    status: props.team.status,
+    media: props.team.media,
+    location: props.team.location,
+    overview: props.team.overview,
+    game: 'rainbowsix',
+    view: true
+})
 
 const submit = () => {
-    form.put(route('dashboard.rainbowsix.teams.update', props.team.id))
+    Inertia.post(`/dashboard/rainbowsix/teams/update/${props.team.id}`, {
+        _method: 'put',
+        name: form.name,
+        region: form.region,
+        sub_region: form.sub_region,
+        status: form.status,
+        media: form.media,
+        location: form.location,
+        overview: form.overview,
+        game: 'rainbowsix',
+        view: true
+    })
 }
 
 </script>
@@ -80,6 +101,19 @@ const submit = () => {
                                 </div>
 
                                 <div class="mb-3">
+                                    <InputLabel for="media" value="Media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <div class="m-2 p-2">
+                                        <img :src="image" class="w-32 h-32">
+                                    </div>
+                                    <TextInput  id="media"
+                                                type="file"
+                                                @input="form.media = $event.target.files[0]"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                required />
+                                    <InputError class="mt-2" :message="form.errors.media" />
+                                </div>
+
+                                <div class="mb-3">
                                     <InputLabel for="location" value="Location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
                                     <TextInput id="location" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 v-model="form.location" required />
@@ -91,14 +125,6 @@ const submit = () => {
                                     <TextInput id="overview" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 v-model="form.overview" required />
                                     <InputError class="mt-2" :message="form.errors.overview" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <InputLabel for="game" value="Game" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
-                                    <select id="game" v-model="form.game" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="rainbowsix">R6</option>
-                                    </select>
-                                    <InputError class="mt-2" :message="form.errors.game" />
                                 </div>
 
                                 <PrimaryButton class="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

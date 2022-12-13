@@ -30,6 +30,8 @@ class HomeController extends Controller
     {
         $player = Player::with('team')->findOrFail($id);
 
+        $image = asset('storage/'. $player->media);
+
         $trendings = Player::where('game', 'valorant')
                             ->where('view', true)
                             ->with('team')
@@ -37,7 +39,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('Valorant/Player', compact('player', 'trendings'));
+        return Inertia::render('Valorant/Player', compact('player', 'trendings', 'image'));
     }
 
     public function valorantAllTeams()
@@ -60,6 +62,8 @@ class HomeController extends Controller
     {
         $team = Team::findOrFail($id);
 
+        $image = asset('storage/'. $team->media);
+
         $trendings = Player::where('game', 'valorant')
                             ->where('view', true)
                             ->with('team')
@@ -67,7 +71,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('Valorant/Team', compact('team', 'trendings'));
+        return Inertia::render('Valorant/Team', compact('team', 'trendings', 'image'));
     }
 
     public function csgoAllPlayers()
@@ -91,6 +95,8 @@ class HomeController extends Controller
     {
         $player = Player::with('team')->findOrFail($id);
 
+        $image = asset('storage/'. $player->media);
+
         $trendings = Player::where('game', 'csgo')
                             ->where('view', true)
                             ->with('team')
@@ -98,7 +104,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('Csgo/Player', compact('player', 'trendings'));
+        return Inertia::render('Csgo/Player', compact('player', 'trendings', 'image'));
     }
 
     public function csgoAllTeams()
@@ -121,6 +127,8 @@ class HomeController extends Controller
     {
         $team = Team::findOrFail($id);
 
+        $image = asset('storage/'. $team->media);
+
         $trendings = Player::where('game', 'csgo')
                             ->where('view', true)
                             ->with('team')
@@ -128,7 +136,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('Csgo/Team', compact('team', 'trendings'));
+        return Inertia::render('Csgo/Team', compact('team', 'trendings', 'image'));
     }
 
     public function rainbowsixAllPlayers()
@@ -152,6 +160,8 @@ class HomeController extends Controller
     {
         $player = Player::with('team')->findOrFail($id);
 
+        $image = asset('storage/'. $player->media);
+
         $trendings = Player::where('game', 'rainbowsix')
                             ->where('view', true)
                             ->with('team')
@@ -159,7 +169,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('R6/Player', compact('player', 'trendings'));
+        return Inertia::render('R6/Player', compact('player', 'trendings', 'image'));
     }
 
     public function rainbowsixAllTeams()
@@ -182,6 +192,8 @@ class HomeController extends Controller
     {
         $team = Team::findOrFail($id);
 
+        $image = asset('storage/'. $team->media);
+
         $trendings = Player::where('game', 'rainbowsix')
                             ->where('view', true)
                             ->with('team')
@@ -189,7 +201,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('R6/Team', compact('team', 'trendings'));
+        return Inertia::render('R6/Team', compact('team', 'trendings', 'image'));
     }
 
 }
