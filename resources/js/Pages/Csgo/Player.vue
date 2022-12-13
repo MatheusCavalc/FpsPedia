@@ -1,7 +1,16 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
+import {computed} from "vue";
 
 const props = defineProps(['player', 'trendings', 'image'])
+
+const age = computed(() => {
+    let currentDate = new Date();
+    let birthDate = new Date(props.player.born);
+    let difference = currentDate - birthDate;
+    let age = Math.floor(difference/31557600000);
+    return age
+});
 
 </script>
 
@@ -19,7 +28,7 @@ const props = defineProps(['player', 'trendings', 'image'])
                             <h5 class="text-gray-900 text-xl font-medium mb-2">{{player.nickname}}</h5>
                             <p class="text-gray-700 text-base mb-2">Name: {{player.name}}</p>
                             <p class="text-gray-700 text-base mb-2">Nationality: {{player.nationality}}</p>
-                            <p class="text-gray-700 text-base mb-2">Born: {{player.born}}</p>
+                            <p class="text-gray-700 text-base mb-2">Born: {{player.born}} (age {{age}})</p>
                             <p class="text-gray-700 text-base mb-2">Team: {{player.team.name}}</p>
                             <p class="text-gray-700 text-base mb-2">Status: {{player.status}}</p>
                         </div>

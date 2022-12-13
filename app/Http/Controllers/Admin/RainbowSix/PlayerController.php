@@ -50,10 +50,10 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nickname' => 'required',
-            'name' => 'required',
-            'nationality' => 'required',
-            'born' => 'required',
+            'nickname' => 'required|max:255',
+            'name' => 'required|max:255',
+            'nationality' => 'required|max:255',
+            'born' => 'required|date',
             'status' => 'required',
             'team_id' => 'required',
             'game' => 'required',
@@ -105,15 +105,15 @@ class PlayerController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'nickname' => 'required',
-            'name' => 'required',
-            'nationality' => 'required',
-            'born' => 'required',
+            'nickname' => 'required|max:255',
+            'name' => 'required|max:255',
+            'nationality' => 'required|max:255',
+            'born' => 'required|date',
             'status' => 'required',
             'team_id' => 'required',
             'game' => 'required',
             'view' => 'required',
-            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
+            'media' => 'max:1024'
         ]);
 
         $data['media'] = $request->media;

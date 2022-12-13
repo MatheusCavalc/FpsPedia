@@ -45,11 +45,11 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'region' => 'required',
             'sub_region' => 'required',
             'status' => 'required',
-            'location' => 'required',
+            'location' => 'required|max:255',
             'overview' => 'required',
             'game' => 'required',
             'view' => 'required',
@@ -98,11 +98,11 @@ class TeamController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'region' => 'required',
             'sub_region' => 'required',
             'status' => 'required',
-            'location' => 'required',
+            'location' => 'required|max:255',
             'overview' => 'required',
             'game' => 'required',
             'view' => 'required',
