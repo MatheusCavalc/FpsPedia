@@ -30,6 +30,9 @@ const form = useForm({
     media: props.team.media,
     location: props.team.location,
     overview: props.team.overview,
+    founders: props.team.founders,
+    ceo: props.team.ceo,
+    earnings: props.team.earnings,
     game: 'csgo',
     view: true
 })
@@ -44,6 +47,9 @@ const submit = () => {
         media: form.media,
         location: form.location,
         overview: form.overview,
+        founders: form.founders,
+        ceo: form.ceo,
+        earnings: form.earnings,
         game: 'csgo',
         view: true
     })
@@ -125,6 +131,27 @@ const submit = () => {
                                     <TextInput id="overview" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 v-model="form.overview" required />
                                     <InputError class="mt-2" :message="form.errors.overview" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="founders" value="Founders" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="founders" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.founders" />
+                                    <InputError class="mt-2" :message="form.errors.founders" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="ceo" value="CEO" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="ceo" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.ceo" />
+                                    <InputError class="mt-2" :message="form.errors.ceo" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="earnings" value="Earnings" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="earnings" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.earnings" />
+                                    <InputError class="mt-2" :message="form.errors.earnings" />
                                 </div>
 
                                 <PrimaryButton class="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

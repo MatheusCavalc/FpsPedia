@@ -11,7 +11,18 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = [
-        'game', 'name', 'region', 'sub_region', 'status', 'location', 'overview', 'media', 'view'
+        'game',
+        'name',
+        'region',
+        'sub_region',
+        'status',
+        'location',
+        'overview',
+        'founders',
+        'ceo',
+        'earnings',
+        'media',
+        'view'
     ];
 
     protected function players(): Attribute

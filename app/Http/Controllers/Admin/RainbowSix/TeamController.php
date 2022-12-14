@@ -52,10 +52,15 @@ class TeamController extends Controller
             'overview' => 'required',
             'game' => 'required',
             'view' => 'required',
-            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
+            'founders' => 'nullable|string|max:255',
+            'ceo' => 'nullable|string|max:255',
+            'earnings' => 'nullable|string|max:255',
+            'media' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:1024'
         ]);
 
-        $data['media'] = FacadesRequest::file('media')->store('teams', 'public');
+        if ($data['media']) {
+            $data['media'] = FacadesRequest::file('media')->store('teams', 'public');
+        }
 
         Team::create($data);
 
@@ -96,6 +101,12 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (is_string($request->media)) {
+            $rule = 'nullable|string';
+        } else {
+            $rule = 'nullable|image|mimes:jpg,png,jpeg,webp|max:1024';
+        }
+
         $data = $request->validate([
             'name' => 'required|max:255',
             'region' => 'required',
@@ -105,13 +116,16 @@ class TeamController extends Controller
             'overview' => 'required',
             'game' => 'required',
             'view' => 'required',
-            'media' => 'max:1024'
+            'founders' => 'nullable|string|max:255',
+            'ceo' => 'nullable|string|max:255',
+            'earnings' => 'nullable|string|max:255',
+            'media' => $rule
         ]);
 
         $data['media'] = $request->media;
 
         if(FacadesRequest::file('media')) {
-            Storage::delete('public/teams/'. $request->media);
+            Storage::delete('public/'. $request->media);
             $data['media'] = FacadesRequest::file('media')->store('teams', 'public');
         }
 

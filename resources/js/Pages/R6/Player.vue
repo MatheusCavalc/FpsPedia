@@ -1,5 +1,6 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
+import { Link } from '@inertiajs/inertia-vue3';
 import {computed} from "vue";
 
 const props = defineProps(['player', 'trendings', 'image'])
@@ -35,7 +36,9 @@ const age = computed(() => {
                             <p class="text-gray-700 text-base mb-2">Nationality: {{player.nationality}}</p>
                             <p class="text-gray-700 text-base mb-2">Born: {{player.born}} (age {{age}})</p>
                             <p class="text-gray-700 text-base mb-2">Status: {{player.status}}</p>
-                            <p v-if="player.team_id" class="text-gray-700 text-base mb-2">Team: {{player.team.name}}</p>
+                            <p v-if="player.team_id" class="text-gray-700 text-base mb-2">Team:
+                                <Link :href="route('home.rainbowsix.team', player.team.id)" class="hover:underline hover:">{{player.team.name}}</Link>
+                            </p>
                             <p v-if="player.alternate_nicks" class="text-gray-700 text-base mb-2">Alternate Nicks: {{player.alternate_nicks}}</p>
                             <p v-if="player.earnings" class="text-gray-700 text-base mb-2">Approx. Total Winnings: ${{player.earnings}}</p>
                         </div>

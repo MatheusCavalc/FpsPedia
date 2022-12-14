@@ -26,6 +26,9 @@ const props = defineProps(['team', 'trendings', 'image'])
                         <p class="text-gray-700 text-base mb-2">Region: {{team.region}}</p>
                         <p class="text-gray-700 text-base mb-2">Sub Region: {{team.sub_region}}</p>
                         <p class="text-gray-700 text-base mb-2 capitalize">Status: {{team.status}}</p>
+                        <p v-if="team.founders" class="text-gray-700 text-base mb-2">Founders: {{team.founders}}</p>
+                        <p v-if="team.ceo" class="text-gray-700 text-base mb-2">CEO: {{team.ceo}}</p>
+                        <p v-if="team.earnings" class="text-gray-700 text-base mb-2">Approx. Total Winnings: ${{team.earnings}}</p>
                     </div>
                 </div>
                 </div>
