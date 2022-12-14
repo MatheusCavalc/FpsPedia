@@ -35,7 +35,6 @@ class PlayerController extends Controller
         $teams = Team::select('id', 'name')
                      ->where('game', 'rainbowsix')
                      ->where('view', true)
-                     ->limit(15)
                      ->get();
 
         return Inertia::render('R6/Dashboard/Players/Create', compact('teams'));
@@ -53,17 +52,22 @@ class PlayerController extends Controller
             'nickname' => 'required|max:255',
             'name' => 'required|max:255',
             'nationality' => 'required|max:255',
+            'overview' => 'required',
             'born' => 'required|date',
             'status' => 'required',
-            'team_id' => 'required',
+            'earnings' => 'nullable|max:12',
+            'alternate_nicks' => 'nullable|string|max:255',
+            'team_id' => 'nullable|array',
             'game' => 'required',
             'view' => 'required',
-            'media' => 'image|mimes:jpg,png,jpeg|max:1024'
+            'media' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:1024'
         ]);
 
         $data['team_id'] = $data['team_id']['id'];
 
-        $data['media'] = FacadesRequest::file('media')->store('players', 'public');
+        if ($data['media']) {
+            $data['media'] = FacadesRequest::file('media')->store('players', 'public');
+        }
 
         Player::create($data);
 
@@ -92,7 +96,12 @@ class PlayerController extends Controller
         $player = Player::findOrFail($id);
         $image = asset('storage/'. $player->media);
 
-        return Inertia::render('R6/Dashboard/Players/Edit', compact('player', 'image'));
+        $teams = Team::select('id', 'name')
+                     ->where('game', 'rainbowsix')
+                     ->where('view', true)
+                     ->get();
+
+        return Inertia::render('R6/Dashboard/Players/Edit', compact('player', 'image', 'teams'));
     }
 
     /**
@@ -104,19 +113,32 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (is_string($request->media)) {
+            $rule = 'nullable|string';
+        } else {
+            $rule = 'nullable|image|mimes:jpg,png,jpeg,webp|max:1024';
+        }
+
         $data = $request->validate([
             'nickname' => 'required|max:255',
             'name' => 'required|max:255',
             'nationality' => 'required|max:255',
+            'overview' => 'required',
             'born' => 'required|date',
             'status' => 'required',
-            'team_id' => 'required',
+            'earnings' => 'nullable|max:10',
+            'alternate_nicks' => 'nullable|string|max:255',
+            'team_id' => 'nullable',
             'game' => 'required',
             'view' => 'required',
-            'media' => 'max:1024'
+            'media' => $rule
         ]);
 
         $data['media'] = $request->media;
+
+        if(is_array($data['team_id'])) {
+            $data['team_id'] = $data['team_id']['id'];
+        }
 
         if(FacadesRequest::file('media')) {
             Storage::delete('public/teams/'. $request->media);

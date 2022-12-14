@@ -18,9 +18,12 @@ const form = useForm({
     nickname: '',
     name: '',
     nationality: '',
+    overview: '',
     media: null,
     born: '',
     status: '',
+    alternate_nicks: '',
+    earnings: '',
     team_id: '',
     game: 'valorant',
     view: true
@@ -47,7 +50,8 @@ const submit = () => {
 
                                 <div class="mb-3">
                                     <InputLabel for="nickname" value="Nickname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
-                                    <TextInput id="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="form.nickname" required />
+                                    <TextInput id="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    v-model="form.nickname" required />
                                     <InputError class="mt-2" :message="form.errors.nickname" />
                                 </div>
                                 <div class="mb-3">
@@ -63,6 +67,12 @@ const submit = () => {
                                     <InputError class="mt-2" :message="form.errors.nationality" />
                                 </div>
 
+                                <div class="mb-3">
+                                    <InputLabel for="overview" value="Overview" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="overview" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.overview" required />
+                                    <InputError class="mt-2" :message="form.errors.overview" />
+                                </div>
 
                                 <div class="mb-3">
                                     <InputLabel for="media" value="Media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
@@ -93,6 +103,20 @@ const submit = () => {
                                         <option value="retired">Retired</option>
                                     </select>
                                     <InputError class="mt-2" :message="form.errors.status" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="alternate_nicks" value="Alternate IDs" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="alternate_nicks" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.alternate_nicks" />
+                                    <InputError class="mt-2" :message="form.errors.alternate_nicks" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="earnings" value="Earnings" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="earnings" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.earnings" />
+                                    <InputError class="mt-2" :message="form.errors.earnings" />
                                 </div>
 
                                 <div class="mb-3">

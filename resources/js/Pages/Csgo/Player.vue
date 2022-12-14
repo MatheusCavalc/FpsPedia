@@ -16,8 +16,13 @@ const age = computed(() => {
 
 <template>
  <MainLayout :game="player.game" :trendings="trendings">
-        <div class="grid grid-cols-3 gap-4">
-            <div></div>
+        <div class="grid grid-cols-4 gap-4">
+            <div class="col-span-2">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <p class="text-xl mb-3 dark:text-white">{{player.nickname}}</p>
+                    <p class="text-base dark:text-white">{{player.overview}}</p>
+                </div>
+            </div>
             <div>
                 <div class="flex justify-center">
                     <div class="rounded-lg shadow-lg bg-white max-w-sm">
@@ -29,8 +34,13 @@ const age = computed(() => {
                             <p class="text-gray-700 text-base mb-2">Name: {{player.name}}</p>
                             <p class="text-gray-700 text-base mb-2">Nationality: {{player.nationality}}</p>
                             <p class="text-gray-700 text-base mb-2">Born: {{player.born}} (age {{age}})</p>
-                            <p class="text-gray-700 text-base mb-2">Team: {{player.team.name}}</p>
                             <p class="text-gray-700 text-base mb-2">Status: {{player.status}}</p>
+                            <p v-if="player.cs_roles" class="text-gray-700 text-base mb-2">Roles:
+                                <span v-for="roles in player.cs_roles">{{roles}}, </span>
+                            </p>
+                            <p v-if="player.team_id" class="text-gray-700 text-base mb-2">Team: {{player.team.name}}</p>
+                            <p v-if="player.alternate_nicks" class="text-gray-700 text-base mb-2">Alternate Nicks: {{player.alternate_nicks}}</p>
+                            <p v-if="player.earnings" class="text-gray-700 text-base mb-2">Approx. Total Winnings: ${{player.earnings}}</p>
                         </div>
                     </div>
                 </div>

@@ -22,9 +22,16 @@ return new class extends Migration
             $table->string('nationality');
             $table->date('born');
             $table->enum('status', ['active', 'inactive', 'retired']);
-            $table->string('media')->nullable();
+            $table->longText('overview');
 
-            $table->foreignId('team_id')->constrained();
+            //nullables
+            $table->string('media')->nullable();
+            $table->foreignId('team_id')->nullable()->constrained();
+            $table->string('alternate_nicks')->nullable();
+            $table->string('earnings')->nullable();
+
+            //for csgo players
+            $table->string('cs_roles')->nullable();
 
             $table->boolean('view')->default(false);
             $table->timestamps();

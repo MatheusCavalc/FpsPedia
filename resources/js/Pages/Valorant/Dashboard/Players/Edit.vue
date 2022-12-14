@@ -1,21 +1,30 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { Head, useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
+
+import Multiselect from 'vue-multiselect';
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
-const props = defineProps(['player', 'image']);
+const props = defineProps(['player', 'image', 'teams']);
+
+function teamName({ name, id }) {
+    return `${name}`
+}
 
 const form = useForm({
     nickname: props.player.nickname,
     name: props.player.name,
     nationality: props.player.nationality,
+    overview: props.player.overview,
     media: props.player.media,
     born: props.player.born,
     status: props.player.status,
+    alternate_nicks: props.player.alternate_nicks,
+    earnings: props.player.earnings,
     team_id: props.player.team_id,
     game: 'valorant',
     view: true
@@ -27,12 +36,15 @@ const submit = () => {
         nickname: form.nickname,
         name: form.name,
         nationality: form.nationality,
+        overview: form.overview,
         media: form.media,
         born: form.born,
         status: form.status,
+        alternate_nicks: form.alternate_nicks,
+        earnings: form.earnings,
         team_id: form.team_id,
-        game: 'valorant',
-        view: true
+        game: form.game,
+        view: form.view
     })
 }
 
@@ -53,7 +65,8 @@ const submit = () => {
 
                                 <div class="mb-3">
                                     <InputLabel for="nickname" value="Nickname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
-                                    <TextInput id="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="form.nickname" required />
+                                    <TextInput id="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    v-model="form.nickname" required />
                                     <InputError class="mt-2" :message="form.errors.nickname" />
                                 </div>
                                 <div class="mb-3">
@@ -67,6 +80,13 @@ const submit = () => {
                                     <TextInput id="nationality" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 v-model="form.nationality" required />
                                     <InputError class="mt-2" :message="form.errors.nationality" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="overview" value="Overview" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="overview" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.overview" required />
+                                    <InputError class="mt-2" :message="form.errors.overview" />
                                 </div>
 
                                 <div class="mb-3">
@@ -105,8 +125,31 @@ const submit = () => {
                                 </div>
 
                                 <div class="mb-3">
+                                    <InputLabel for="alternate_nicks" value="Alternate IDs" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="alternate_nicks" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.alternate_nicks" />
+                                    <InputError class="mt-2" :message="form.errors.alternate_nicks" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <InputLabel for="earnings" value="Earnings" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                                    <TextInput id="earnings" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.earnings" />
+                                    <InputError class="mt-2" :message="form.errors.earnings" />
+                                </div>
+
+                                <div class="mb-3">
                                     <InputLabel for="team_id" value="Team" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
-                                    <TextInput id="team_id" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="form.team_id" required />
+                                    <Multiselect
+                                        v-model="form.team_id"
+                                        :options="teams"
+                                        placeholder="Select a team"
+                                        :custom-label="teamName"
+                                        label="name"
+                                        track-by="name"
+                                        @input="teamID"
+                                        >
+                                    </Multiselect>
                                     <InputError class="mt-2" :message="form.errors.team_id" />
                                 </div>
 

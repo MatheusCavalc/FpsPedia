@@ -167,8 +167,8 @@
     </nav>
 
 
-      <main class="flex flex-col w-full bg-white overflow-x-hidden overflow-y-auto mb-14">
-        <div class="flex w-full mx-auto px-6 py-8">
+      <main class="flex flex-col w-full h-full bg-white overflow-x-hidden overflow-y-auto mb-14">
+        <div class="flex w-full h-full mx-auto px-6 py-8">
           <div class="flex flex-col w-full h-full text-gray-900 text-xl">
 
             <!-- Page Content -->
