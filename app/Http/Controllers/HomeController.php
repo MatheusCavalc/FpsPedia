@@ -64,6 +64,10 @@ class HomeController extends Controller
 
         $image = asset('storage/'. $team->media);
 
+        $players = Player::where('view', true)
+                         ->where('team_id', $team->id)
+                         ->get();
+
         $trendings = Player::where('game', 'valorant')
                             ->where('view', true)
                             ->with('team')
@@ -71,7 +75,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('Valorant/Team', compact('team', 'trendings', 'image'));
+        return Inertia::render('Valorant/Team', compact('team', 'trendings', 'image', 'players'));
     }
 
     public function csgoAllPlayers()
@@ -129,6 +133,10 @@ class HomeController extends Controller
 
         $image = asset('storage/'. $team->media);
 
+        $players = Player::where('view', true)
+                         ->where('team_id', $team->id)
+                         ->get();
+
         $trendings = Player::where('game', 'csgo')
                             ->where('view', true)
                             ->with('team')
@@ -136,7 +144,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('Csgo/Team', compact('team', 'trendings', 'image'));
+        return Inertia::render('Csgo/Team', compact('team', 'trendings', 'image', 'players'));
     }
 
     public function rainbowsixAllPlayers()
@@ -194,6 +202,10 @@ class HomeController extends Controller
 
         $image = asset('storage/'. $team->media);
 
+        $players = Player::where('view', true)
+                         ->where('team_id', $team->id)
+                         ->get();
+
         $trendings = Player::where('game', 'rainbowsix')
                             ->where('view', true)
                             ->with('team')
@@ -201,7 +213,7 @@ class HomeController extends Controller
                             ->take(5)
                             ->get();
 
-        return Inertia::render('R6/Team', compact('team', 'trendings', 'image'));
+        return Inertia::render('R6/Team', compact('team', 'trendings', 'image', 'players'));
     }
 
 }
