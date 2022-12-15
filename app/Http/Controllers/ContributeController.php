@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 
 class ContributeController extends Controller
 {
     public function player($game)
     {
-        $teams = Team::select('id', 'name')->where('game', $game)->limit(15)->get();
+        $teams = Team::select('id', 'name')
+                     ->where('game', $game)
+                     ->where('view', true)
+                     ->get();
 
         return Inertia::render('Contribute/Player', compact('game', 'teams'));
     }
@@ -19,17 +23,26 @@ class ContributeController extends Controller
     public function storePlayer(Request $request)
     {
         $data = $request->validate([
-            'nickname' => 'required',
-            'name' => 'required',
-            'nationality' => 'required',
-            'born' => 'required',
+            'nickname' => 'required|max:255',
+            'name' => 'required|max:255',
+            'nationality' => 'required|max:255',
+            'overview' => 'required',
+            'born' => 'required|date',
             'status' => 'required',
-            'team_id' => 'required',
+            'cs_roles' => 'nullable|array',
+            'earnings' => 'nullable|max:10',
+            'alternate_nicks' => 'nullable|string|max:255',
+            'team_id' => 'nullable|array',
             'game' => 'required',
-            'view' => 'required'
+            'view' => 'required',
+            'media' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:1024'
         ]);
 
         $data['team_id'] = $data['team_id']['id'];
+
+        if ($data['media']) {
+            $data['media'] = FacadesRequest::file('media')->store('players', 'public');
+        }
 
         Player::create($data);
 
@@ -44,15 +57,23 @@ class ContributeController extends Controller
     public function storeTeam(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:teams',
+            'name' => 'required|max:255',
             'region' => 'required',
             'sub_region' => 'required',
             'status' => 'required',
-            'location' => 'required',
+            'location' => 'required|max:255',
             'overview' => 'required',
             'game' => 'required',
-            'view' => 'required'
+            'view' => 'required',
+            'founders' => 'nullable|string|max:255',
+            'ceo' => 'nullable|string|max:255',
+            'earnings' => 'nullable|string|max:255',
+            'media' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:1024'
         ]);
+
+        if ($data['media']) {
+            $data['media'] = FacadesRequest::file('media')->store('teams', 'public');
+        }
 
         Team::create($data);
 

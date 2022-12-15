@@ -10,6 +10,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 const props = defineProps(['game', 'teams'])
 
+const roles = ['in-game leader', 'rifler', 'lurker', 'entry fragger', 'support', 'awper']
+
 function teamName({ name, id }) {
     return `${name}`
 }
@@ -18,8 +20,13 @@ const form = useForm({
     nickname: '',
     name: '',
     nationality: '',
+    overview: '',
+    media: null,
     born: '',
     status: '',
+    alternate_nicks: '',
+    earnings: '',
+    cs_roles: [],
     team_id: '',
     game: props.game,
     view: false
@@ -45,7 +52,8 @@ const submit = () => {
                 <form @submit.prevent="submit">
                     <div class="mb-3">
                         <InputLabel for="nickname" value="Nickname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
-                        <TextInput id="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="form.nickname" required />
+                        <TextInput id="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    v-model="form.nickname" required />
                         <InputError class="mt-2" :message="form.errors.nickname" />
                     </div>
 
@@ -61,6 +69,23 @@ const submit = () => {
                         <TextInput id="nationality" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     v-model="form.nationality" required />
                         <InputError class="mt-2" :message="form.errors.nationality" />
+                    </div>
+
+                    <div class="mb-3">
+                        <InputLabel for="overview" value="Overview" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                        <TextInput id="overview" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    v-model="form.overview" required />
+                        <InputError class="mt-2" :message="form.errors.overview" />
+                    </div>
+
+                    <div class="mb-3">
+                        <InputLabel for="media" value="Media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                        <TextInput  id="media"
+                                    type="file"
+                                    @input="form.media = $event.target.files[0]"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    />
+                        <InputError class="mt-2" :message="form.errors.media" />
                     </div>
 
                     <div class="mb-3">
@@ -83,6 +108,40 @@ const submit = () => {
                             <option value="retired">Retired</option>
                         </select>
                         <InputError class="mt-2" :message="form.errors.status" />
+                    </div>
+
+                    <div class="mb-3">
+                        <InputLabel for="alternate_nicks" value="Alternate IDs" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                        <TextInput id="alternate_nicks" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    v-model="form.alternate_nicks" />
+                        <InputError class="mt-2" :message="form.errors.alternate_nicks" />
+                    </div>
+
+                    <div class="mb-3">
+                        <InputLabel for="earnings" value="Earnings" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                        <TextInput id="earnings" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="form.earnings" />
+                        <InputError class="mt-2" :message="form.errors.earnings" />
+                    </div>
+
+                    <div v-if="props.game == 'csgo'" class="mb-3">
+                        <InputLabel for="cs_roles" value="Roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black" />
+                        <Multiselect
+                            v-model="form.cs_roles"
+                            :options="roles"
+                            :multiple="true"
+                            :close-on-select="false"
+                            :clear-on-select="false"
+                            :preserve-search="true"
+                            placeholder="Select a player roles"
+                            :preselect-first="false"
+                            label="" track-by=""
+                            >
+                            <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                            </template>
+                        </Multiselect>
+                        <InputError class="mt-2" :message="form.errors.cs_roles" />
                     </div>
 
                     <div class="mb-3">
