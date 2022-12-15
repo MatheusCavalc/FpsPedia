@@ -55,7 +55,6 @@ const props = defineProps(['team', 'trendings', 'image', 'players'])
                     <div class="mt-3">
                         <p class="text-xl">Players Inactive</p>
                         <hr class="h-px bg-white border-0 dark:bg-gray-800">
-
                         <div class="mt-4">
                             <TeamPlayersTable>
                                 <template #headColumns>
