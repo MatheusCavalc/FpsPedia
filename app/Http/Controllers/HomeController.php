@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -78,6 +79,22 @@ class HomeController extends Controller
         return Inertia::render('Valorant/Team', compact('team', 'trendings', 'image', 'players'));
     }
 
+    public function valorantAllTournaments()
+    {
+        $tournaments = Tournament::where('game', 'valorant')
+                         ->where('view', true)
+                         ->get();
+
+        $trendings = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('Valorant/Tournaments', compact('tournaments', 'trendings'));
+    }
+
     public function csgoAllPlayers()
     {
         $players = Player::where('game', 'csgo')
@@ -147,6 +164,22 @@ class HomeController extends Controller
         return Inertia::render('Csgo/Team', compact('team', 'trendings', 'image', 'players'));
     }
 
+    public function csgoAllTournaments()
+    {
+        $tournaments = Tournament::where('game', 'csgo')
+                         ->where('view', true)
+                         ->get();
+
+        $trendings = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('Csgo/Tournaments', compact('tournaments', 'trendings'));
+    }
+
     public function rainbowsixAllPlayers()
     {
         $players = Player::where('game', 'rainbowsix')
@@ -214,6 +247,22 @@ class HomeController extends Controller
                             ->get();
 
         return Inertia::render('R6/Team', compact('team', 'trendings', 'image', 'players'));
+    }
+
+    public function rainbowsixAllTournaments()
+    {
+        $tournaments = Tournament::where('game', 'rainbowsix')
+                         ->where('view', true)
+                         ->get();
+
+        $trendings = Player::where('game', 'csgo')
+                         ->where('view', true)
+                         ->with('team')
+                         ->orderBy('updated_at', 'desc')
+                         ->take(5)
+                         ->get();
+
+        return Inertia::render('R6/Tournaments', compact('tournaments', 'trendings'));
     }
 
 }

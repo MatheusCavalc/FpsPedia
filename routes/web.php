@@ -8,12 +8,15 @@ use App\Http\Controllers\MainController;
 
 use App\Http\Controllers\Admin\Valorant\PlayerController;
 use App\Http\Controllers\Admin\Valorant\TeamController;
+use App\Http\Controllers\Admin\Valorant\TournamentController as ValorantTournamentController;
 
 use App\Http\Controllers\Admin\CSGO\PlayerController as CSGOPlayerController;
 use App\Http\Controllers\Admin\CSGO\TeamController as CSGOTeamController;
+use App\Http\Controllers\Admin\CSGO\TournamentController;
 
 use App\Http\Controllers\Admin\RainbowSix\PlayerController as RainbowSixPlayerController;
 use App\Http\Controllers\Admin\RainbowSix\TeamController as RainbowSixTeamController;
+use App\Http\Controllers\Admin\RainbowSix\TournamentController as RainbowSixTournamentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,15 +45,21 @@ Route::controller(HomeController::class)->name('home.')->group(function () {
     Route::get('/valorant/teams', 'valorantAllTeams')->name('valorant.teams');
     Route::get('/valorant/team/{id}', 'valorantTeam')->name('valorant.team');
 
+    Route::get('/valorant/tournaments', 'valorantAllTournaments')->name('valorant.tournaments');
+
     Route::get('/csgo/players', 'csgoAllPlayers')->name('csgo.players');
     Route::get('/csgo/player/{id}', 'csgoPlayer')->name('csgo.player');
     Route::get('/csgo/teams', 'csgoAllTeams')->name('csgo.teams');
     Route::get('/csgo/team/{id}', 'csgoTeam')->name('csgo.team');
 
+    Route::get('/csgo/tournaments', 'csgoAllTournaments')->name('csgo.tournaments');
+
     Route::get('/rainbowsix/players', 'rainbowsixAllPlayers')->name('rainbowsix.players');
     Route::get('/rainbowsix/player/{id}', 'rainbowsixPlayer')->name('rainbowsix.player');
     Route::get('/rainbowsix/teams', 'rainbowsixAllTeams')->name('rainbowsix.teams');
     Route::get('/rainbowsix/team/{id}', 'rainbowsixTeam')->name('rainbowsix.team');
+
+    Route::get('/rainbowsix/tournaments', 'rainbowsixAllTournaments')->name('rainbowsix.tournaments');
 });
 
 
@@ -94,6 +103,17 @@ Route::controller(TeamController::class)->middleware(['auth', 'valorant_editor']
     //Route::delete('/teams/{id}', 'destroy')->name('destroy');
 });
 
+//Tournaments Valorant
+Route::controller(ValorantTournamentController::class)->middleware(['auth', 'valorant_editor'])->prefix('dashboard/valorant')->name('dashboard.valorant.tournaments.')->group(function () {
+    Route::get('/tournaments', 'index')->name('index');//todos os jogadores
+    Route::get('/tournaments/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/tournaments', 'store')->name('store');
+    //Route::get('/tournaments/{id}', 'show')->name('show');
+    Route::get('/tournaments/edit/{id}', 'edit')->name('edit');
+    Route::put('/tournaments/update/{id}', 'update')->name('update');
+    //Route::delete('/tournaments/{id}', 'destroy')->name('destroy');
+});
+
 //Players CSGO
 Route::controller(CSGOPlayerController::class)->middleware(['auth', 'csgo_editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.players.')->group(function () {
     Route::get('/players', 'index')->name('index');//todos os jogadores
@@ -116,6 +136,17 @@ Route::controller(CSGOTeamController::class)->middleware(['auth', 'csgo_editor']
     //Route::delete('/teams/{id}', 'destroy')->name('destroy');
 });
 
+//Tournaments CSGO
+Route::controller(TournamentController::class)->middleware(['auth', 'csgo_editor'])->prefix('dashboard/csgo')->name('dashboard.csgo.tournaments.')->group(function () {
+    Route::get('/tournaments', 'index')->name('index');//todos os jogadores
+    Route::get('/tournaments/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/tournaments', 'store')->name('store');
+    //Route::get('/tournaments/{id}', 'show')->name('show');
+    Route::get('/tournaments/edit/{id}', 'edit')->name('edit');
+    Route::put('/tournaments/update/{id}', 'update')->name('update');
+    //Route::delete('/tournaments/{id}', 'destroy')->name('destroy');
+});
+
 //Players R6
 Route::controller(RainbowSixPlayerController::class)->middleware(['auth', 'rainbowsix_editor'])->prefix('dashboard/rainbowsix')->name('dashboard.rainbowsix.players.')->group(function () {
     Route::get('/players', 'index')->name('index');//todos os jogadores
@@ -136,6 +167,17 @@ Route::controller(RainbowSixTeamController::class)->middleware(['auth', 'rainbow
     Route::get('/teams/edit/{id}', 'edit')->name('edit');
     Route::put('/teams/update/{id}', 'update')->name('update');
     //Route::delete('/teams/{id}', 'destroy')->name('destroy');
+});
+
+//Tournaments R6
+Route::controller(RainbowSixTournamentController::class)->middleware(['auth', 'rainbowsix_editor'])->prefix('dashboard/rainbowsix')->name('dashboard.rainbowsix.tournaments.')->group(function () {
+    Route::get('/tournaments', 'index')->name('index');//todos os jogadores
+    Route::get('/tournaments/create', 'create')->name('create');//ir pra tela de criacao -- dashboard
+    Route::post('/tournaments', 'store')->name('store');
+    //Route::get('/tournaments/{id}', 'show')->name('show');
+    Route::get('/tournaments/edit/{id}', 'edit')->name('edit');
+    Route::put('/tournaments/update/{id}', 'update')->name('update');
+    //Route::delete('/tournaments/{id}', 'destroy')->name('destroy');
 });
 
 

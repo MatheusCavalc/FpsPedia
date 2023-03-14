@@ -18,11 +18,7 @@ import HomeLayout from '@/Layouts/HomeLayout.vue';
                 <ul class="list-none">
                     <p><Link :href="route('home.valorant.teams')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Teams</Link></p>
                     <p><Link :href="route('home.valorant.players')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
-                    <p>
-                        <Link class="text-gray-700 hover:text-sky-400 hover:underline text-base">
-                        Tournaments <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>
-                        </Link>
-                    </p>
+                    <p><Link :href="route('home.valorant.tournaments')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Tournaments</Link></p>
                 </ul>
             </div>
             <div class="px-6 pt-4 pb-2">
@@ -42,11 +38,7 @@ import HomeLayout from '@/Layouts/HomeLayout.vue';
                 <ul class="list-none">
                     <p><Link :href="route('home.csgo.teams')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Teams</Link></p>
                     <p><Link :href="route('home.csgo.players')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
-                    <p>
-                        <Link class="text-gray-700 hover:text-sky-400 hover:underline text-base">
-                        Tournaments <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>
-                        </Link>
-                    </p>
+                    <p><Link :href="route('home.csgo.tournaments')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Tournaments</Link></p>
                 </ul>
             </div>
             <div class="px-6 pt-4 pb-2">
@@ -65,11 +57,7 @@ import HomeLayout from '@/Layouts/HomeLayout.vue';
                 <ul class="list-none">
                     <p><Link :href="route('home.rainbowsix.teams')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Teams</Link></p>
                     <p><Link :href="route('home.rainbowsix.players')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Players</Link></p>
-                    <p>
-                        <Link class="text-gray-700 hover:text-sky-400 hover:underline text-base">
-                        Tournaments <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Soon</span>
-                        </Link>
-                    </p>
+                    <p><Link :href="route('home.rainbowsix.tournaments')" class="text-gray-700 hover:text-sky-400 hover:underline text-base">Tournaments</Link></p>
                 </ul>
             </div>
             <div class="px-6 pt-4 pb-2">
