@@ -1,3 +1,42 @@
+# Instalando o projeto
+
+O projeto se utiliza de contêineres Docker, através do pacote *Laravel Sail* para facilitar a configuração do ambiente de desenvolvimento. Portanto, é necessário que já possua o Docker e o Docker Compose instalados na máquina.
+
+### Passos para o rodar o projeto localmente:
+
+- Faça um clone do projeto para sua máquina local
+- Navegue até o diretório raiz do projeto clonado e execute o comando abaixo para instalar as dependências do projeto:
+```shell
+composer install
+```
+- Copie o arquivo .env.example e renomeie para .env. Você pode fazer isso executando o seguinte comando:
+```shell
+cp .env.example .env
+```
+- Gere uma chave de aplicativo Laravel usando o seguinte comando:
+```shell
+php artisan key:generate
+```
+- Execute o seguinte comando para iniciar o Docker e o Laravel Sail:
+```shell
+./vendor/bin/sail up -d
+```
+- Execute o comando abaixo para popular o banco de dados com as tabelas necessarias para a aplicacao:
+```shell
+./vendor/bin/sail artisan migrate
+```
+- Para instalar as dependências do NPM no projeto execute o comando:
+```shell
+./vendor/bin/sail npm install
+```
+- Para compilar os arquivos da aplicacao:
+```shell
+./vendor/bin/sail npm run dev
+```
+
+Depois que os comandos acima forem executados, você poderá acessar seu aplicativo Laravel em http://localhost.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
